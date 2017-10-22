@@ -80,14 +80,18 @@ sequence1 = [0, 2, 4, 8, 11]
 sequence2 = [3, 6, 10]
 sequence3 = [9, 13]
 
-# Create a new sequencer
-seq = Sequencer()
+notInterrupted = True
+while notInterrupted:
+  # Create a new sequencer
+  seq = Sequencer()
 
-# Add the events to the sequencer
-seq.events = seq.events + [(i,0) for i in sequence1]
-seq.events = seq.events + [(i,1) for i in sequence2]
-seq.events = seq.events + [(i,2) for i in sequence3]
+  # Add the events to the sequencer
+  seq.events = seq.events + [(i,0) for i in sequence1]
+  seq.events = seq.events + [(i,1) for i in sequence2]
+  seq.events = seq.events + [(i,2) for i in sequence3]
   
-# Play the sequence
-seq.play(bpm)
-seq.play(bpm * 0.75)
+  # Play the sequence
+  seq.play(bpm)
+  
+  # Ask for input
+  input("Would you like to save this beat Y/N (N)? ")
