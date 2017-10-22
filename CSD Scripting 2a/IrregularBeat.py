@@ -75,11 +75,52 @@ class Sequencer:
   
   # Generate an irregular sequence
   @classmethod 
-  def generate(cls, bpm, beats, beatsPerBar=4):
-    events = [(i,0) for i in range(0,beats,2)] + [(i,1) for i in range(0,beats,2)]
+  def generate_irregular_beat(cls, bpm, length):
+    # Generate a list of pattern lengths
+    patterns = generate_patterns(length)
+        
+    # Create an empty event list
+    events = []
+        
+    # Generate a kick and snare pattern using the lengths
+    eventPosition = 0
+    for pattern in patterns:
+      # Append a kick event at the start of the pattern
+      events.append((eventPosition,0))
+      
+      # Append a snare event at a random position in the pattern
+      snarePosition = random.randrange(1,pattern)
+      events.append((eventPosition + snarePosition,1))
+      
+      # Fill the gaps with hats
+      for hatPosition in range(pattern):
+        if hatPosition != snarePosition:
+          events.append((eventPosition + hatPosition,2))
+    
+      # Increase the event position
+      eventPosition += pattern
     
     # Return a new sequencer with the event list
     return cls.create_from_indexes(events,bpm)
+    
+# Recursively generates a list of patterns
+def generate_patterns(length):
+  if length == 2:
+    # Add a 2-pattern
+    return [2]
+  elif length == 3:
+    # Add a 3-pattern
+    return [3]
+  elif length == 4:
+    # Add a 4-pattern or two 2-patterns
+    return random.choice([[4],[2,2]])
+  elif length == 5:
+    # Add a 2-3 or 3-2
+    return random.choice([[2,3],[3,2]])
+  else:
+    # Add a random pattern
+    currentLength = random.choice([2,3,4])
+    return [currentLength] + generate_patterns(length - currentLength)
 
 # Main function
 def main():    
@@ -99,7 +140,7 @@ def main():
   }
 
   # Create a list to store the samples
-  samples = Sampler()
+  sampler = Sampler()
 
   # Ask for the samples to use
   print("Enter the following settings to configure the script (press ENTER for the default value)")
@@ -107,7 +148,7 @@ def main():
     while True:
       # Ask for the sample to use and append it to the list
       sampleFile = input("- Enter the path to sample #%d (%s): " % (i + 1, defaults["samples"][i]))
-      if samples.append_file(sampleFile or defaults["samples"][i]):
+      if sampler.append_file(sampleFile or defaults["samples"][i]):
         break
       else:
         print("Could not fild the file! Please try again.")
@@ -124,10 +165,13 @@ def main():
   notInterrupted = True
   while notInterrupted:
     # Create a new sequencer
-    seq = Sequencer.generate(bpm,5);
+    beats = random.randrange(5,10)
+    seq = Sequencer.generate_irregular_beat(bpm,beats);
+    
+    print("Sequence with %d beats" % beats)
 
-    # Play the sequence
-    seq.play(samples)
+    # Play the sequence using the sampler
+    seq.play(sampler)
   
     # Ask for input
     if input("Enter someting to quit: "):
