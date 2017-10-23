@@ -45,6 +45,7 @@ class Sequencer:
         time.sleep(0.001)
         
   # Recursively generates a list of patterns
+  # Returns a list containing lengths of the patterns
   @staticmethod
   def generate_patterns(length):
     if length == 2:
@@ -65,6 +66,7 @@ class Sequencer:
       return [currentLength] + Sequencer.generate_patterns(length - currentLength)
         
   # Create a sequence from an index-based list
+  # Returns a sequencer with durations in seconds
   @classmethod
   def create_from_indexes(cls, events, bpm=120):
     # Calculate the duration of a 16th note
@@ -78,6 +80,7 @@ class Sequencer:
     return cls(events)
   
   # Generate an irregular sequence
+  # Returns a sequencer with a generated beat
   @classmethod 
   def generate_irregular_beat(cls, bpm, length):
     # Generate a list of pattern lengths

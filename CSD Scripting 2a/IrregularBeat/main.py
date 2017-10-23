@@ -3,17 +3,38 @@ from sequencer import Sequencer
 from selector import Selector
 
 import random
+import re
 import colorama
 
 # Create a list of default values for user settings
 defaults = {
   "samples": ["assets/808-Kick.wav","assets/808-Snare.wav","assets/808-OH.wav"],
+  "timeSignature": "7/8",
   "bpm": 120
 }
-      
+
+# Return a number of 16th notes for a given time signature
+def time_signature(timeSignature):
+  # Create a RegEx pattern and find it
+  match = re.match("(\\d+)/([1248])",timeSignature)
+  
+  # If no match
+  if not match:
+    # Return None, because error
+    return None
+  else:
+    # Otherwise parse the expression
+    try:
+      beats = int(match.group(1))
+      signature = int(match.group(2))
+      return beats * (16 / signature)
+    except ValueError:
+      # Not an integer
+      return None
+       
 # Initialize a sampler with user input settings
 def init_sampler():
-  # Create a list to store the samples
+  # Create a sampler to store the samples
   sampler = Sampler()
   
   # Print a newline
@@ -44,10 +65,13 @@ def generate_beat():
   print(colorama.Fore.BLACK + colorama.Back.GREEN + "Enter the settings for the new beat (press ENTER for the default value)")
 
   # Ask for the time signature to use
-  try:
-    timeSignatureInput = input("  Enter the time signature (7/8): ")
-  except ValueError:
-    pass
+  while True:
+    timeSignatureInput = input("  Enter the time signature (%s): " % defaults["timeSignature"])
+    timeSignature = time_signature(timeSignatureInput or defaults["timeSignature"])
+    if timeSignature:
+      break
+    else:
+      print(colorama.Fore.RED + "  Invalid time signature, make sure you use the format '7/8'. Please try again.")
   
   # Ask for the bpm to use
   while True:
@@ -56,11 +80,10 @@ def generate_beat():
       bpm = int(bpmInput or defaults["bpm"])
       break
     except ValueError:
-      print(colorama.Fore.RED + "  Invalid input, please try again.")
+      print(colorama.Fore.RED + "  Invalid number, please try again.")
   
   # Create a new sequencer and return it
-  beats = random.randrange(5,10)
-  return Sequencer.generate_irregular_beat(bpm,beats);
+  return Sequencer.generate_irregular_beat(bpm,timeSignature);
     
 # Print the welcome message
 def welcome_message():
@@ -89,15 +112,14 @@ def main():
   seq = generate_beat()
 
   # Main loop
-  notInterrupted = True
-  while notInterrupted:
+  while True:
     # Play the sequence using the sampler
     seq.play(sampler)
     
     # Print a newline
     print("")
   
-    # Options to continue
+    # Options to continue, function returns the selected option
     option = Selector(["Save the beat to a MIDI file","Replay the current beat","Generate a new beat","Exit the application"]).select()
     if option == 1:
       # Save the beat to a MIDI file

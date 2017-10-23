@@ -20,13 +20,14 @@ class Selector:
     inputInt = None
     while inputInt == None:
       try:
+        # Retrieve the input
         inputStr = input("Enter your choice: ")
         inputInt = int(inputStr)
         if inputInt <= 0 or inputInt > len(self.options):
           raise ValueError
         break
       except ValueError:
-        print("Invalid")
+        print(colorama.Fore.RED + "  Invalid choice, please try again.")
         inputInt = None
         
     # Return the index of the selected option
