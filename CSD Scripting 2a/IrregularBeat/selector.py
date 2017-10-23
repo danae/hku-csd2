@@ -3,11 +3,11 @@ import colorama
 # Class for choosing/selecting things in a terminal
 class Selector:
   # Constructor
-  # Options is a list of strings
   def __init__(self, options):
-    self.options = options
+    self.options = options # List of strings
     
   # Let the user choose an option
+  # Returns the index of the selected option
   def select(self):
     # Print the header
     print(colorama.Fore.BLACK + colorama.Back.GREEN + "What would you like to do next?")

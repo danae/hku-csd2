@@ -5,23 +5,24 @@ from midiutil import MIDIFile
 # Sequencer class
 class Sequencer:
   # Constructor
-  # Events is a list of tuples (event time in s, sample)
-  def __init__(self, bpm=120, events=[]):
-    self.bpm = bpm
-    self.events = events
-    
-    # Calculate the duration of a 16th note
-    quarterNoteDuration = 60.0 / self.bpm
-    sixteenthNoteDuration = quarterNoteDuration / 4.0
-    
-    # Convert event indices to seconds
-    self.events = [(event[0] * sixteenthNoteDuration,event[1]) for event in self.events]
+  def __init__(self, bpm=120, beats=4, beatUnit=4, events=[]):
+    self.bpm = bpm # Beats per minute
+    self.beats = beats # Number of beats in the bas
+    self.beatUnit = beatUnit # Which note represents one beat
+    self.events = events # A list of tuples (event time in beats, sample)
     
   # Plays the sequence (blocking method)
   def play(self, sampler):  
     # Copy the event list for re-usage and sort them by time
     events = self.events[:]
     events.sort()
+    
+    # Calculate the duration of a 16th note
+    beatDuration = 60.0 / self.bpm
+    noteDuration = beatDuration / self.beatUnit
+    
+    # Convert event indices to seconds
+    events = [(event[0] * noteDuration,event[1]) for event in events]
     
     # If there are no events, then just return
     if not events:
@@ -54,16 +55,33 @@ class Sequencer:
         time.sleep(0.001)
         
   # Export the sequence to a MIDI file
-  def export_midi(self, fileName):
+  def export_midi(self, fileName, pitches=[36,38,42]):
     # Create a MIDI file
     midi = MIDIFile(1,adjust_origin=True)
     
+    # Add the tempo track
+    midi.addTempo(0,0,self.bpm)
+    
+    # Add the events as notes
+    for event in self.events:
+      # Calculate the time and duration (and other variables)
+      channel = 9 # Because 0-15
+      pitch = pitches[event[1]]
+      time = event[0] / self.beatUnit
+      duration = 1
+      velocity = 100
+      # Add the note
+      midi.addNote(0,channel,pitch,time,duration,velocity)
+    
     # Export the file
     try:
+      # Open the file
       with open(fileName,"wb") as output:
+        # Write the MIDI to the file
         midi.writeFile(output)
       return True
     except IOError:
+      # Error, return False
       return False
         
   # Recursively generates a list of patterns
@@ -90,9 +108,12 @@ class Sequencer:
   # Generate an irregular sequence
   # Returns a sequencer with a generated beat
   @classmethod 
-  def generate_irregular_beat(cls, bpm, length):
+  def generate_irregular_beat(cls, bpm=120, beats=4, beatUnit=4):
+    # Calculate the number of 16th notes
+    noteCount = 16 / beatUnit * beats
+  
     # Generate a list of pattern lengths
-    patterns = Sequencer.generate_patterns(length)
+    patterns = Sequencer.generate_patterns(noteCount)
         
     # Create an empty event list
     events = []
@@ -116,4 +137,4 @@ class Sequencer:
       eventPosition += pattern
     
     # Return a new sequencer with the event list
-    return cls(bpm,events)
+    return cls(bpm,beats,beatUnit,events)

@@ -9,12 +9,13 @@ import colorama
 # Create a list of default values for user settings
 defaults = {
   "samples": ["assets/808-Kick.wav","assets/808-Snare.wav","assets/808-OH.wav"],
-  "timeSignature": "7/8",
+  "timeSignature": "4/4",
   "bpm": 120,
   "fileName": "export.mid"
 }
 
-# Return a number of 16th notes for a given time signature
+# Parse a time signature string
+# Returns a tuple of beats and beatUnit for a string
 def time_signature(timeSignature):
   # Create a RegEx pattern and find it
   match = re.match("(\\d+)/([1248])",timeSignature)
@@ -26,9 +27,11 @@ def time_signature(timeSignature):
   else:
     # Otherwise parse the expression
     try:
+      # Get the match groups
       beats = int(match.group(1))
-      signature = int(match.group(2))
-      return beats * (16 / signature)
+      beatUnit = int(match.group(2))
+      # Return them in a tuple
+      return (beats,beatUnit)
     except ValueError:
       # Not an integer
       return None
@@ -84,7 +87,7 @@ def generate_beat():
       print(colorama.Fore.RED + "  Invalid number, please try again.")
   
   # Create a new sequencer and return it
-  return Sequencer.generate_irregular_beat(bpm,timeSignature);
+  return Sequencer.generate_irregular_beat(bpm,timeSignature[0],timeSignature[1]);
   
 # Export a sequence as MIDI file with user input settings
 def export_midi(seq):
@@ -114,7 +117,6 @@ def welcome_message():
   print(colorama.Fore.BLACK + colorama.Style.BRIGHT + "  Generate beats with 2-3-4-patterns in irregular time signatures")
   print(colorama.Fore.BLACK + colorama.Style.BRIGHT + "  Created by dengsn (https://github.com/dengsn)")
  
-
 # Main function
 def main():    
   # Initialize colorama
@@ -158,4 +160,3 @@ def main():
 # Execute the main function if not importing the script
 if __name__ == "__main__":
   main()
-  
