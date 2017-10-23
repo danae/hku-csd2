@@ -10,7 +10,8 @@ import colorama
 defaults = {
   "samples": ["assets/808-Kick.wav","assets/808-Snare.wav","assets/808-OH.wav"],
   "timeSignature": "7/8",
-  "bpm": 120
+  "bpm": 120,
+  "fileName": "export.mid"
 }
 
 # Return a number of 16th notes for a given time signature
@@ -84,6 +85,23 @@ def generate_beat():
   
   # Create a new sequencer and return it
   return Sequencer.generate_irregular_beat(bpm,timeSignature);
+  
+# Export a sequence as MIDI file with user input settings
+def export_midi(seq):
+  # Print a newline
+  print("")
+  
+  # Print the header
+  print(colorama.Fore.BLACK + colorama.Back.GREEN + "Save the beat to a MIDI file (press ENTER for the default value)")
+
+  # Ask for the time signature to use
+  fileName = input("  Enter the file to save (%s): " % defaults["fileName"])
+  
+  # Export the MIDI file
+  if not seq.export_midi(fileName or defaults["fileName"]):
+    print(colorama.Fore.RED + "  Could not write to the selected file, please try again.")
+  else:
+    print (colorama.Fore.GREEN + "  Saved file successfully!")
     
 # Print the welcome message
 def welcome_message():
@@ -123,7 +141,7 @@ def main():
     option = Selector(["Save the beat to a MIDI file","Replay the current beat","Generate a new beat","Exit the application"]).select()
     if option == 1:
       # Save the beat to a MIDI file
-      pass
+      export_midi(seq)
     elif option == 2:
       # Replay the current beat -> just pass
       pass

@@ -1,5 +1,6 @@
 import time
 import random
+from midiutil import MIDIFile
 
 # Sequencer class
 class Sequencer:
@@ -43,6 +44,19 @@ class Sequencer:
       # Otherwise wait for a short moment
       else:
         time.sleep(0.001)
+        
+  # Export the sequence to a MIDI file
+  def export_midi(self, fileName):
+    # Create a MIDI file
+    midi = MIDIFile(1,adjust_origin=True)
+    
+    # Export the file
+    try:
+      with open(fileName,"wb") as output:
+        midi.writeFile(output)
+      return True
+    except IOError:
+      return False
         
   # Recursively generates a list of patterns
   # Returns a list containing lengths of the patterns
