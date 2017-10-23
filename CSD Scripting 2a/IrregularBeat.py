@@ -173,12 +173,13 @@ def generate_beat():
     pass
   
   # Ask for the bpm to use
-  try:
-    bpmInput = input("  Enter the desired BPM (%d): " % defaults["bpm"])
-    bpm = int(bpmInput or defaults["bpm"])
-  except ValueError:
-    print("Invalid input, using default BPM")
-    bpm = defaults["bpm"]
+  while True:
+    try:
+      bpmInput = input("  Enter the desired BPM (%d): " % defaults["bpm"])
+      bpm = int(bpmInput or defaults["bpm"])
+      break
+    except ValueError:
+      print(colorama.Fore.RED + "  Invalid input, please try again.")
   
   # Create a new sequencer and return it
   beats = random.randrange(5,10)
@@ -203,7 +204,7 @@ def init_sampler():
       if sampler.append_file(sampleFile or defaults["samples"][i]):
         break
       else:
-        print(colorama.Fore.RED + "  Could not find the file! Please try again.")
+        print(colorama.Fore.RED + "  Could not find the file, please try again.")
         
   # Return the sampler
   return sampler
@@ -220,8 +221,8 @@ def main():
   print(colorama.Fore.GREEN + colorama.Style.NORMAL + " |___|_| |_| \___\__, |\_,_|_\__,_|_| |___/\___\__,_|\__(_) .__/\_, |")
   print(colorama.Fore.GREEN + colorama.Style.NORMAL + "                 |___/                                    |_|   |__/ ")
   print("")
-  print("  Generate beats with 2-3-4-patterns in irregular time signatures")
-  print("  Created by dengsn (https://github.com/dengsn)")
+  print(colorama.Fore.BLACK + colorama.Style.BRIGHT + "  Generate beats with 2-3-4-patterns in irregular time signatures")
+  print(colorama.Fore.BLACK + colorama.Style.BRIGHT + "  Created by dengsn (https://github.com/dengsn)")
   
   # Initialize the sampler
   sampler = init_sampler()
