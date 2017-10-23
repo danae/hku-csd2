@@ -6,8 +6,16 @@ from midiutil import MIDIFile
 class Sequencer:
   # Constructor
   # Events is a list of tuples (event time in s, sample)
-  def __init__(self, events=[]):
+  def __init__(self, bpm=120, events=[]):
+    self.bpm = bpm
     self.events = events
+    
+    # Calculate the duration of a 16th note
+    quarterNoteDuration = 60.0 / self.bpm
+    sixteenthNoteDuration = quarterNoteDuration / 4.0
+    
+    # Convert event indices to seconds
+    self.events = [(event[0] * sixteenthNoteDuration,event[1]) for event in self.events]
     
   # Plays the sequence (blocking method)
   def play(self, sampler):  
@@ -78,20 +86,6 @@ class Sequencer:
       # Add a random pattern
       currentLength = random.choice([2,3,4])
       return [currentLength] + Sequencer.generate_patterns(length - currentLength)
-        
-  # Create a sequence from an index-based list
-  # Returns a sequencer with durations in seconds
-  @classmethod
-  def create_from_indexes(cls, events, bpm=120):
-    # Calculate the duration of a 16th note
-    quarterNoteDuration = 60.0 / bpm
-    sixteenthNoteDuration = quarterNoteDuration / 4.0
-    
-    # Map the event list to durations
-    events = [(event[0] * sixteenthNoteDuration, event[1]) for event in events]
-    
-    # Return a new sequencer with the event list
-    return cls(events)
   
   # Generate an irregular sequence
   # Returns a sequencer with a generated beat
@@ -122,4 +116,4 @@ class Sequencer:
       eventPosition += pattern
     
     # Return a new sequencer with the event list
-    return cls.create_from_indexes(events,bpm)
+    return cls(bpm,events)
