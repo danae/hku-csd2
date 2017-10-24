@@ -97,14 +97,16 @@ def export_midi(seq):
   # Print the header
   print(colorama.Fore.BLACK + colorama.Back.GREEN + "Save the beat to a MIDI file (press ENTER for the default value)")
 
-  # Ask for the time signature to use
-  fileName = input("  Enter the file to save (%s): " % defaults["fileName"])
+  # Ask for the file name to use
+  while True:
+    fileName = input("  Enter the file to save (%s): " % defaults["fileName"])
   
-  # Export the MIDI file
-  if not seq.export_midi(fileName or defaults["fileName"]):
-    print(colorama.Fore.RED + "  Could not write to the selected file, please try again.")
-  else:
-    print (colorama.Fore.GREEN + "  Saved file successfully!")
+    # Export the MIDI file
+    if not seq.export_midi(fileName or defaults["fileName"]):
+      print(colorama.Fore.RED + "  Could not write to the selected file, please try again.")
+    else:
+      print (colorama.Fore.GREEN + "  Saved file successfully!")
+      break
     
 # Print the welcome message
 def welcome_message():
