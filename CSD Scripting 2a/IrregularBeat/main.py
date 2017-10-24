@@ -80,8 +80,10 @@ def generate_beat():
   # Ask for the bpm to use
   while True:
     try:
-      bpmInput = input("  Enter the desired BPM (%d): " % defaults["bpm"])
+      bpmInput = input("  Enter the desired BPM, between 30 and 200 (%d): " % defaults["bpm"])
       bpm = int(bpmInput or defaults["bpm"])
+      if bpm < 30 or bpm > 200:
+        raise ValueError
       break
     except ValueError:
       print(colorama.Fore.RED + "  Invalid number, please try again.")
