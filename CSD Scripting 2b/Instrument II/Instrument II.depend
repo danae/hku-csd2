@@ -1,0 +1,42 @@
+# depslib dependency file v1.0
+1511183133 source:d:\hku\2017-2018\csd scripting\csd scripting 2b\instrument\instrument.cpp
+	<iostream>
+	<string>
+	"Instrument.h"
+
+1511183000 d:\hku\2017-2018\csd scripting\csd scripting 2b\instrument\instrument.h
+	<string>
+
+1512567859 source:e:\hku\2017-2018\csd scripting\csd scripting 2b\instrument ii\main.cpp
+	<iostream>
+	"Instrument.h"
+
+1512568138 e:\hku\2017-2018\csd scripting\csd scripting 2b\instrument ii\instrument.h
+	<string>
+
+1512568177 source:e:\hku\2017-2018\csd scripting\csd scripting 2b\instrument ii\instrument.cpp
+	<iostream>
+	<typeinfo>
+	"Instrument.h"
+
+1512568220 source:e:\hku\2017-2018\csd scripting\csd scripting 2b\instrument ii\brass.cpp
+	"Brass.h"
+
+1512568196 e:\hku\2017-2018\csd scripting\csd scripting 2b\instrument ii\brass.h
+	<string>
+	"Instrument.h"
+
+1512568343 source:e:\hku\2017-2018\csd scripting\csd scripting 2b\instrument ii\strings.cpp
+	"Strings.h"
+
+1512568313 e:\hku\2017-2018\csd scripting\csd scripting 2b\instrument ii\strings.h
+	<string>
+	"Instrument.h"
+
+1512568601 source:e:\hku\2017-2018\csd scripting\csd scripting 2b\instrument ii\keys.cpp
+	"Keys.h"
+
+1512568802 e:\hku\2017-2018\csd scripting\csd scripting 2b\instrument ii\keys.h
+	<string>
+	"Instrument.h"
+

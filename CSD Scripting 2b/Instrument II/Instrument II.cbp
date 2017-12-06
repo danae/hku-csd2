@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="Instrument" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Build">
+				<Option output="build/Instrument" prefix_auto="1" extension_auto="1" />
+				<Option object_output="build/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+		</Compiler>
+		<Unit filename="Brass.cpp" />
+		<Unit filename="Brass.h" />
+		<Unit filename="Instrument.cpp" />
+		<Unit filename="Instrument.h" />
+		<Unit filename="Keys.cpp" />
+		<Unit filename="Keys.h" />
+		<Unit filename="Strings.cpp" />
+		<Unit filename="Strings.h" />
+		<Unit filename="main.cpp" />
+		<Extensions>
+			<code_completion />
+			<debugger />
+			<lib_finder disable_auto="1" />
+			<envvars />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
