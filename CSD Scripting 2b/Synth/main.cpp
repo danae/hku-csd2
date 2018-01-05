@@ -1,6 +1,8 @@
 #include <iostream>
 
 #include "Oscillator.h"
+#include "SineWave.h"
+#include "SquareWave.h"
 #include "Synthesizer.h"
 #include "SimpleSynthesizer.h"
 
@@ -11,24 +13,37 @@ int main()
   // Create an audio buffer
   float audioBuffer[256] = {0.0f};
 
-  // Create a new Oscillator
-  Oscillator* oscillator = new Oscillator(440.0f);
+  // Create a sine wave oscillator
+  Oscillator* sineWave = new SineWave(440.0f,0.0f);
 
-  // Create a synthesizer with the oscillator
-  Synthesizer* synthesizer = new SimpleSynthesizer(oscillator);
+  // Create a sine wave synthesizer
+  Synthesizer* sineSynth = new SimpleSynthesizer(sineWave);
 
-  // Process
-  synthesizer->process(audioBuffer,256);
-
-  // Print the result
+  // Process the sine wave
+  cout << "Processing sine wave:" << endl;
+  sineSynth->process(audioBuffer,256);
   for (int i = 0; i < 256; i ++)
-  {
-    std::cout << i << ": " << audioBuffer[i] << std::endl;
-  }
+    cout << i << ": " << audioBuffer[i] << endl;
+
+
+    // Create a square wave oscillator
+  Oscillator* squareWave = new SquareWave(440.0f,0.0f);
+
+  // Create a square wave synthesizer
+  Synthesizer* squareSynth = new SimpleSynthesizer(squareWave);
+
+  // Process the sine wave
+  cout << "Processing square wave:" << endl;
+  squareSynth->process(audioBuffer,256);
+  for (int i = 0; i < 256; i ++)
+    cout << i << ": " << audioBuffer[i] << endl;
+
 
   // Delete resources
-  delete synthesizer;
-  delete oscillator;
+  delete sineSynth;
+  delete sineWave;
+  delete squareSynth;
+  delete squareWave;
 
  // Return
   return 0;

@@ -1,11 +1,13 @@
 # depslib dependency file v1.0
-1515168555 source:e:\hku\2017-2018\csd scripting\csd scripting 2b\synth\main.cpp
+1515171100 source:e:\hku\2017-2018\csd scripting\csd scripting 2b\synth\main.cpp
 	<iostream>
 	"Oscillator.h"
+	"SineWave.h"
+	"SquareWave.h"
 	"Synthesizer.h"
 	"SimpleSynthesizer.h"
 
-1515168092 e:\hku\2017-2018\csd scripting\csd scripting 2b\synth\oscillator.h
+1515170629 e:\hku\2017-2018\csd scripting\csd scripting 2b\synth\oscillator.h
 
 1515168416 e:\hku\2017-2018\csd scripting\csd scripting 2b\synth\synthesizer.h
 
@@ -13,12 +15,22 @@
 	"Synthesizer.h"
 	"Oscillator.h"
 
-1515168154 source:e:\hku\2017-2018\csd scripting\csd scripting 2b\synth\oscillator.cpp
+1515169899 source:e:\hku\2017-2018\csd scripting\csd scripting 2b\synth\oscillator.cpp
 	"Oscillator.h"
 
-1515168470 source:e:\hku\2017-2018\csd scripting\csd scripting 2b\synth\simplesynthesizer.cpp
+1515170350 source:e:\hku\2017-2018\csd scripting\csd scripting 2b\synth\simplesynthesizer.cpp
 	"SimpleSynthesizer.h"
 
 1515168414 source:e:\hku\2017-2018\csd scripting\csd scripting 2b\synth\synthesizer.cpp
 	"Synthesizer.h"
+
+1515170961 source:e:\hku\2017-2018\csd scripting\csd scripting 2b\synth\sinewave.cpp
+	"SineWave.h"
+	<cmath>
+
+1515169323 e:\hku\2017-2018\csd scripting\csd scripting 2b\synth\sinewave.h
+	"Oscillator.h"
+
+1515171105 e:\hku\2017-2018\csd scripting\csd scripting 2b\synth\squarewave.h
+	"Oscillator.h"
 

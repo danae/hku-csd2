@@ -1,7 +1,8 @@
 #include "SimpleSynthesizer.h"
 
 // Constructor
-SimpleSynthesizer::SimpleSynthesizer(Oscillator* _oscillator) : Synthesizer()
+SimpleSynthesizer::SimpleSynthesizer(Oscillator* _oscillator)
+ : Synthesizer()
 {
   oscillator = _oscillator;
 }

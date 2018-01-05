@@ -1,16 +1,20 @@
 #ifndef OSCILLATOR_H
 #define OSCILLATOR_H
 
+// Sample rate
+#define SAMPLE_RATE 256
+
 // Oscillator class
 class Oscillator
 {
-private:
+public:
   float frequency;
   float phase;
+  int sample;
 
-public:
+//public:
   // Constructor
-  Oscillator(float _frequency);
+  Oscillator(float _frequency, float _phase);
 
   // Destructor
   virtual ~Oscillator();
@@ -24,7 +28,7 @@ public:
   // Increase the phase
   void tick();
 
-  // Generate the sample at the current phase
+  // Get the sample at the current phase
   virtual float getSample();
 };
 
