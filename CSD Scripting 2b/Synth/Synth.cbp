@@ -20,6 +20,16 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="Oscillator.cpp" />
+		<Unit filename="Oscillator.h" />
+		<Unit filename="SimpleSynthesizer.cpp" />
+		<Unit filename="SimpleSynthesizer.h" />
+		<Unit filename="SineWave.cpp" />
+		<Unit filename="SineWave.h" />
+		<Unit filename="SquareWave.cpp" />
+		<Unit filename="SquareWave.h" />
+		<Unit filename="Synthesizer.cpp" />
+		<Unit filename="Synthesizer.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />

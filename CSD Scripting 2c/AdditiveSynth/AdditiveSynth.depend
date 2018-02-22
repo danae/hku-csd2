@@ -1,0 +1,22 @@
+# depslib dependency file v1.0
+1519316332 source:e:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\sinewave.cpp
+	"SineWave.h"
+
+1519316324 e:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\sinewave.h
+
+1519317550 source:e:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\main.cpp
+	<iostream>
+	<soundio/soundio.h>
+	"SineWave.h"
+
+1454238386 e:\libraries\cpp\libsoundio-1.1.0\soundio\soundio.h
+	"endian.h"
+	<stdbool.h>
+
+1454238386 e:\libraries\cpp\libsoundio-1.1.0\soundio\endian.h
+
+1519317304 source:e:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\soundiowrapper.cpp
+	"SoundIoWrapper.h"
+
+1519317317 e:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\soundiowrapper.h
+
