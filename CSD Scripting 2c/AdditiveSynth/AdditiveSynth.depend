@@ -1,12 +1,15 @@
 # depslib dependency file v1.0
-1519316332 source:e:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\sinewave.cpp
+1519324295 source:e:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\sinewave.cpp
 	"SineWave.h"
+	<math.h>
 
-1519316324 e:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\sinewave.h
+1519322764 e:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\sinewave.h
+	"Oscillator.h"
 
-1519317550 source:e:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\main.cpp
+1519324285 source:e:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\main.cpp
 	<iostream>
 	<soundio/soundio.h>
+	"SoundModule.h"
 	"SineWave.h"
 
 1454238386 e:\libraries\cpp\libsoundio-1.1.0\soundio\soundio.h
@@ -19,4 +22,93 @@
 	"SoundIoWrapper.h"
 
 1519317317 e:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\soundiowrapper.h
+
+1519322714 e:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\oscillator.h
+
+1519322568 source:e:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\oscillator.cpp
+	"Oscillator.h"
+
+1519324275 e:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\soundmodule.h
+	<soundio/soundio.h>
+
+1519734730 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\main.cpp
+	<iostream>
+	<jack/jack.h>
+	"jack_module.h"
+	"Synthesizer.h"
+	"SineWave.h"
+
+1519730067 d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\soundmodule.h
+	<functional>
+	<soundio/soundio.h>
+
+1519673101 d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\sinewave.h
+	"Oscillator.h"
+
+1519733473 d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\oscillator.h
+
+1519733537 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\oscillator.cpp
+	"Oscillator.h"
+
+1519733412 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\sinewave.cpp
+	"SineWave.h"
+	<math.h>
+
+1519728720 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\soundmodule.cpp
+	"SoundModule.h"
+	<stdexcept>
+	<string>
+
+1454267185 d:\libraries\cpp\libsoundio-1.1.0\soundio\soundio.h
+	"endian.h"
+	<stdbool.h>
+
+1454267185 d:\libraries\cpp\libsoundio-1.1.0\soundio\endian.h
+
+1515401831 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\jack_module.cpp
+	<iostream>
+	<mutex>
+	<unistd.h>
+	"math.h"
+	"jack_module.h"
+
+1519731506 d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\jack_module.h
+	<string>
+	<functional>
+	<jack/jack.h>
+
+1453804335 c:\apps\jack\includes\jack\jack.h
+	<jack/systemdeps.h>
+	<jack/types.h>
+	<jack/transport.h>
+	<jack/weakmacros.h>
+
+1453804335 c:\apps\jack\includes\jack\systemdeps.h
+	<windows.h>
+	<stdint.h>
+	<sys/types.h>
+	<inttypes.h>
+	<pthread.h>
+	<sys/types.h>
+	<ptw32/pthread.h>
+	<stdint.h>
+	<inttypes.h>
+	<pthread.h>
+	<sys/types.h>
+
+1453804335 c:\apps\jack\includes\jack\types.h
+	<jack/systemdeps.h>
+
+1329821249 c:\apps\jack\includes\jack\transport.h
+	<jack/types.h>
+	<jack/weakmacros.h>
+
+1453804335 c:\apps\jack\includes\jack\weakmacros.h
+
+1519734592 d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\synthesizer.h
+	<vector>
+	"Oscillator.h"
+
+1519734804 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\synthesizer.cpp
+	"Synthesizer.h"
 

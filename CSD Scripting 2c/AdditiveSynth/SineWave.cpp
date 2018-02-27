@@ -1,11 +1,11 @@
 #include "SineWave.h"
 
+#include <math.h>
+
 // Constructor
-SineWave::SineWave(float frequency, float amplitude, float phaseOffset)
+SineWave::SineWave(double sampleRate, double frequency, double amplitude, double phaseOffset) :
+  Oscillator(sampleRate,frequency,amplitude,phase)
 {
-  this->frequency = frequency;
-  this->amplitude = amplitude;
-  this->phaseOffset = phaseOffset;
 }
 
 // Destructor
@@ -13,28 +13,8 @@ SineWave::~SineWave()
 {
 }
 
-// Getters and setters
-float SineWave::getFrequency()
+// Calculate the sample based on the phase
+double SineWave::calculate()
 {
-  return frequency;
-}
-void SineWave::setFrequency(float value)
-{
-  frequency = value;
-}
-float SineWave::getAmplitude()
-{
-  return amplitude;
-}
-void SineWave::setAmplitude(float value)
-{
-  amplitude = value;
-}
-float SineWave::getPhaseOffset()
-{
-  return phaseOffset;
-}
-void SineWave::setPhaseOffset(float value)
-{
-  phaseOffset = value;
+  return sin(phase * PI_2) * amplitude;
 }

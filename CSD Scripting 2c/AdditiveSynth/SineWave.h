@@ -1,28 +1,19 @@
 #ifndef SINEWAVE_H
 #define SINEWAVE_H
 
-class SineWave
-{
-  private:
-    // Variables
-    float frequency;
-    float amplitude;
-    float phaseOffset;
+#include "Oscillator.h"
 
+class SineWave : public Oscillator
+{
   public:
     // Constructor
-    SineWave(float frequency, float amplitude = 1.0f, float phaseOffset = 0.0f);
+    SineWave(double sampleRate, double frequency, double amplitude = 1.0f, double phase = 0.0f);
 
     // Destructor
     virtual ~SineWave();
 
-    // Getters ans setters
-    float getFrequency();
-    void setFrequency(float value);
-    float getAmplitude();
-    void setAmplitude(float value);
-    float getPhaseOffset();
-    void setPhaseOffset(float value);
+    // Calculate the sample based on the phase
+    double calculate();
 };
 
 #endif // SINEWAVE_H

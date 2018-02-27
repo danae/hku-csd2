@@ -26,16 +26,22 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="Oscillator.cpp">
+			<Option virtualFolder="Classes/" />
+		</Unit>
+		<Unit filename="Oscillator.h">
+			<Option virtualFolder="Classes/" />
+		</Unit>
 		<Unit filename="SineWave.cpp">
 			<Option virtualFolder="Classes/" />
 		</Unit>
 		<Unit filename="SineWave.h">
 			<Option virtualFolder="Classes/" />
 		</Unit>
-		<Unit filename="SoundIoWrapper.cpp">
+		<Unit filename="SoundModule.cpp">
 			<Option virtualFolder="Classes/" />
 		</Unit>
-		<Unit filename="SoundIoWrapper.h">
+		<Unit filename="SoundModule.h">
 			<Option virtualFolder="Classes/" />
 		</Unit>
 		<Unit filename="main.cpp" />
