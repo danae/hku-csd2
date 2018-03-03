@@ -1,6 +1,7 @@
 #include <iostream>
-#include <jack/jack.h>
+#include <vector>
 #include <math.h>
+#include <jack/jack.h>
 
 #include "jack_module.h"
 #include "Synthesizer.h"
@@ -32,6 +33,8 @@ int main(int argc, const char** argv)
   patch->addOperator(new RatioOperator(1.5, 10, 0.1));
   patch->addOperator(new RatioOperator(2.0, -20, 0.33));
   patch->addOperator(new FixedOperator(400, 0.5));
+
+  cout << patch->toString();
 
   // Create a new synth based on the patch
   Synthesizer *synth = patch->convert(jack.getSamplerate(),mtof(60));

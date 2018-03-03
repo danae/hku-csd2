@@ -20,6 +20,9 @@ class FixedOperator : public Operator
 
     // Convert this operator to an oscillator with a base frequency
     Oscillator* convert(int sampleRate, double baseFrequency);
+
+    // Create a string representation for this operator
+    std::string toString();
 };
 
 #endif // FIXEDOPERATOR_H

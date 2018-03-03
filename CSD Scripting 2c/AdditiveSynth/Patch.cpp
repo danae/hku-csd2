@@ -1,7 +1,5 @@
 #include "Patch.h"
-#include <vector>
-
-using namespace std;
+#include <sstream>
 
 // Constructor
 Patch::Patch()
@@ -12,8 +10,8 @@ Patch::Patch()
 Patch::~Patch()
 {
   // Delete operators that are left over
-  for (vector<Operator*>::iterator it = operators.begin(); it != operators.end(); ++ it)
-    delete *it;
+  for (Operator *op : operators)
+    delete op;
 }
 
 // Add an operator
@@ -40,9 +38,27 @@ Synthesizer* Patch::convert(int sampleRate, double baseFrequency)
   Synthesizer *synth = new Synthesizer();
 
   // Iterate over all operators and convert them to oscillators
-  for (vector<Operator*>::iterator it = operators.begin(); it != operators.end(); ++ it)
-    synth->addOscillator((*it)->convert(sampleRate,baseFrequency));
+  for (Operator *op : operators)
+    synth->addOscillator(op->convert(sampleRate,baseFrequency));
 
   // Return the synthesizer
   return synth;
+}
+
+// Create a string representation for this operator
+std::string Patch::toString()
+{
+  std::stringstream ss;
+
+  // Print current patch info
+  ss << "Current patch contains " << operators.size() << " operators:";
+
+  // Print all operators
+  for (int i = 0; i < operators.size(); i ++)
+  {
+    Operator *op = operators[i];
+    ss << std::endl << i << ". " << op->toString();
+  }
+
+  return ss.str();
 }

@@ -2,6 +2,7 @@
 #define OPERATOR_H
 
 #include "Oscillator.h"
+#include <string>
 
 class Operator
 {
@@ -22,6 +23,9 @@ class Operator
 
     // Convert this operator to an oscillator with a base frequency
     virtual Oscillator* convert(int sampleRate, double baseFrequency) = 0;
+
+    // Create a string representation for this operator
+    virtual std::string toString() = 0;
 };
 
 #endif // OPERATOR_H

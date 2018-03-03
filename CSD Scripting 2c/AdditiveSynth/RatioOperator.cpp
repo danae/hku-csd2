@@ -1,5 +1,6 @@
 #include "RatioOperator.h"
 #include "SineWave.h"
+#include <sstream>
 
 // Constructor
 RatioOperator::RatioOperator(double ratio, double detune, double amplitude, double phase) :
@@ -40,4 +41,12 @@ Oscillator* RatioOperator::convert(int sampleRate, double baseFrequency)
 
   // Return a new sine wave with the frequency
   return new SineWave(sampleRate,frequency,amplitude,phase);
+}
+
+// Create a string representation for this operator
+std::string RatioOperator::toString()
+{
+  std::stringstream ss;
+  ss << "Ratio operator (ratio = " << ratio << ", detune = " << detune << " Hz, amplitude = " << amplitude << ")";
+  return ss.str();
 }

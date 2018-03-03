@@ -1,7 +1,5 @@
 #include "Synthesizer.h"
 
-using namespace std;
-
 // Constructor
 Synthesizer::Synthesizer()
 {
@@ -11,8 +9,8 @@ Synthesizer::Synthesizer()
 Synthesizer::~Synthesizer()
 {
   // Delete oscillators that are left over
-  for (vector<Oscillator*>::iterator it = oscillators.begin(); it != oscillators.end(); ++ it)
-    delete *it;
+  for (Oscillator* oscillator : oscillators)
+    delete oscillator;
 }
 
 // Add an oscillator
@@ -37,8 +35,8 @@ Oscillator* Synthesizer::getOscillator(int index)
 void Synthesizer::tick()
 {
   // Iterate over the oscillators and tick them
-  for (vector<Oscillator*>::iterator it = oscillators.begin(); it != oscillators.end(); ++ it)
-    (*it)->tick();
+  for (Oscillator* oscillator : oscillators)
+    oscillator->tick();
 }
 
 // Calculate the sample for all oscillators
@@ -48,8 +46,8 @@ double Synthesizer::calculate()
   double result = 0.0;
 
   // Iterate over the oscillators and add the sample of the oscillator to the result
-  for (vector<Oscillator*>::iterator it = oscillators.begin(); it != oscillators.end(); ++ it)
-    result += (*it)->calculate();
+  for (Oscillator* oscillator : oscillators)
+    result += oscillator->calculate();
 
   // Divide the result by the number of oscillators, so the output is max 1.0
   result /= oscillators.size();

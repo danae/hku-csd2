@@ -3,6 +3,7 @@
 
 #include "Operator.h"
 #include "Oscillator.h"
+#include <string>
 
 class RatioOperator : public Operator
 {
@@ -23,6 +24,9 @@ class RatioOperator : public Operator
 
     // Convert this operator to an oscillator with a base frequency
     Oscillator* convert(int sampleRate, double baseFrequency);
+
+    // Create a string representation for this operator
+    std::string toString();
 };
 
 #endif // RATIOOPERATOR_H
