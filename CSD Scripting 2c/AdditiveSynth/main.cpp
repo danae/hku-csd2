@@ -28,11 +28,11 @@ int main(int argc, const char** argv)
 
   // Add operators
   patch->addOperator(new RatioOperator(1.0));
-  patch->addOperator(new RatioOperator(1.5));
-  patch->addOperator(new RatioOperator(2.0,-20));
+  patch->addOperator(new RatioOperator(1.5, 10, 0.1));
+  patch->addOperator(new RatioOperator(2.0, -20, 0.33));
 
   // Create a new synth based on the patch
-  Synthesizer *synth = patch->convert(jack.getSamplerate(),mtof(48));
+  Synthesizer *synth = patch->convert(jack.getSamplerate(),mtof(60));
 
   // Create a callback for the Jack module
   jack.onProcess = [&synth](jack_default_audio_sample_t* inBuf, jack_default_audio_sample_t* outBuf, jack_nframes_t nframes)

@@ -12,7 +12,7 @@ class RatioOperator : public Operator
     double detune;
 
   public:
-    RatioOperator(double ratio = 1.0, double detune = 0.0);
+    RatioOperator(double ratio, double detune = 0.0, double amplitude = 1.0, double phase = 0.0);
     virtual ~RatioOperator();
 
     // Getters and setters

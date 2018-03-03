@@ -2,7 +2,8 @@
 #include "SineWave.h"
 
 // Constructor
-RatioOperator::RatioOperator(double ratio, double detune)
+RatioOperator::RatioOperator(double ratio, double detune, double amplitude, double phase) :
+  Operator(amplitude,phase)
 {
   this->ratio = ratio;
   this->detune = detune;
@@ -38,5 +39,5 @@ Oscillator* RatioOperator::convert(int sampleRate, double baseFrequency)
   double frequency = baseFrequency * ratio + detune;
 
   // Return a new sine wave with the frequency
-  return new SineWave(sampleRate,frequency);
+  return new SineWave(sampleRate,frequency,amplitude,phase);
 }
