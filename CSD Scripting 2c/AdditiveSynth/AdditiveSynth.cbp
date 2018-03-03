@@ -5,7 +5,7 @@
 		<Option title="AdditiveSynth" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="Classes\;jack_module\;" />
+		<Option virtualFolders="Patch Classes\;Audio Classes\;Jack Module\;UI Classes\;" />
 		<Build>
 			<Script file="lib_finder.script" />
 			<Target title="Build">
@@ -17,6 +17,7 @@
 					<Add option="-g" />
 					<Add directory="C:/Apps/Jack/includes" />
 					<Add directory="include" />
+					<Add directory="../AdditiveSynth" />
 				</Compiler>
 				<Linker>
 					<Add library="C:/Apps/Jack/lib/libjack.lib" />
@@ -27,29 +28,55 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="FixedOperator.cpp">
+			<Option virtualFolder="Patch Classes/" />
+		</Unit>
+		<Unit filename="FixedOperator.h">
+			<Option virtualFolder="Patch Classes/" />
+		</Unit>
+		<Unit filename="Operator.cpp">
+			<Option virtualFolder="Patch Classes/" />
+		</Unit>
+		<Unit filename="Operator.h">
+			<Option virtualFolder="Patch Classes/" />
+		</Unit>
 		<Unit filename="Oscillator.cpp">
-			<Option virtualFolder="Classes/" />
+			<Option virtualFolder="Audio Classes/" />
 		</Unit>
 		<Unit filename="Oscillator.h">
-			<Option virtualFolder="Classes/" />
+			<Option virtualFolder="Audio Classes/" />
+		</Unit>
+		<Unit filename="Patch.cpp">
+			<Option virtualFolder="Patch Classes/" />
+		</Unit>
+		<Unit filename="Patch.h">
+			<Option virtualFolder="Patch Classes/" />
+		</Unit>
+		<Unit filename="Prompt.cpp" />
+		<Unit filename="Prompt.h" />
+		<Unit filename="RatioOperator.cpp">
+			<Option virtualFolder="Patch Classes/" />
+		</Unit>
+		<Unit filename="RatioOperator.h">
+			<Option virtualFolder="Patch Classes/" />
 		</Unit>
 		<Unit filename="SineWave.cpp">
-			<Option virtualFolder="Classes/" />
+			<Option virtualFolder="Audio Classes/" />
 		</Unit>
 		<Unit filename="SineWave.h">
-			<Option virtualFolder="Classes/" />
+			<Option virtualFolder="Audio Classes/" />
 		</Unit>
 		<Unit filename="Synthesizer.cpp">
-			<Option virtualFolder="Classes/" />
+			<Option virtualFolder="Audio Classes/" />
 		</Unit>
 		<Unit filename="Synthesizer.h">
-			<Option virtualFolder="Classes/" />
+			<Option virtualFolder="Audio Classes/" />
 		</Unit>
 		<Unit filename="jack_module.cpp">
-			<Option virtualFolder="jack_module/" />
+			<Option virtualFolder="Jack Module/" />
 		</Unit>
 		<Unit filename="jack_module.h">
-			<Option virtualFolder="jack_module/" />
+			<Option virtualFolder="Jack Module/" />
 		</Unit>
 		<Unit filename="main.cpp" />
 		<Extensions>

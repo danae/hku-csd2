@@ -31,7 +31,7 @@
 1519324275 e:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\soundmodule.h
 	<soundio/soundio.h>
 
-1520093493 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\main.cpp
+1520101623 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\main.cpp
 	<iostream>
 	<vector>
 	<math.h>
@@ -42,6 +42,7 @@
 	"Patch.h"
 	"RatioOperator.h"
 	"FixedOperator.h"
+	"Prompt.h"
 
 1519730067 d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\soundmodule.h
 	<functional>
@@ -123,8 +124,9 @@
 	"Oscillator.h"
 	<string>
 
-1520093038 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\patch.cpp
+1520093571 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\patch.cpp
 	"Patch.h"
+	<sstream>
 
 1520093115 d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\operator.h
 	"Oscillator.h"
@@ -151,4 +153,17 @@
 1520092708 d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\fixedoperator.h
 	"Operator.h"
 	"Oscillator.h"
+
+1520101510 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\prompt.cpp
+	"Prompt.h"
+	<vector>
+	<iostream>
+	<sstream>
+	<cstdlib>
+
+1520101505 d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\prompt.h
+	<string>
+	<functional>
+	<map>
+	<vector>
 
