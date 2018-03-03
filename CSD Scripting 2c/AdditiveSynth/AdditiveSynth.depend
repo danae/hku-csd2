@@ -31,9 +31,10 @@
 1519324275 e:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\soundmodule.h
 	<soundio/soundio.h>
 
-1519734730 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\main.cpp
+1520090070 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\main.cpp
 	<iostream>
 	<jack/jack.h>
+	<math.h>
 	"jack_module.h"
 	"Synthesizer.h"
 	"SineWave.h"
@@ -42,15 +43,15 @@
 	<functional>
 	<soundio/soundio.h>
 
-1519673101 d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\sinewave.h
+1520089513 d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\sinewave.h
 	"Oscillator.h"
 
-1519733473 d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\oscillator.h
+1520089559 d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\oscillator.h
 
-1519733537 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\oscillator.cpp
+1520089580 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\oscillator.cpp
 	"Oscillator.h"
 
-1519733412 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\sinewave.cpp
+1520089504 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\sinewave.cpp
 	"SineWave.h"
 	<math.h>
 
@@ -105,10 +106,17 @@
 
 1453804335 c:\apps\jack\includes\jack\weakmacros.h
 
-1519734592 d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\synthesizer.h
+1520089729 d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\synthesizer.h
 	<vector>
 	"Oscillator.h"
 
-1519734804 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\synthesizer.cpp
+1520089976 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\synthesizer.cpp
 	"Synthesizer.h"
+
+1520088954 d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\patch.h
+	<vector>
+	"Oscillator.h"
+
+1520088960 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\patch.cpp
+	"Patch.h"
 

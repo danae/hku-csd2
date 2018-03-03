@@ -1,7 +1,7 @@
 #include "Oscillator.h"
 
 // Constructor
-Oscillator::Oscillator(double sampleRate, double frequency, double amplitude = 1.0, double phase = 0.0)
+Oscillator::Oscillator(int sampleRate, double frequency, double amplitude, double phase)
 {
   this->sampleRate = sampleRate;
   this->frequency = frequency;
@@ -15,6 +15,10 @@ Oscillator::~Oscillator()
 }
 
 // Getters and setters
+int Oscillator::getSampleRate()
+{
+  return sampleRate;
+}
 double Oscillator::getFrequency()
 {
   return frequency;
@@ -31,8 +35,8 @@ double Oscillator::getPhase()
 // Tick the Oscillator
 void Oscillator::tick()
 {
-  // Calculate the new phase
+// Calculate the new phase and vind it between 0-1
   phase += frequency / sampleRate;
-  if (phase >= 1)
-    phase -= 1;
+  while (phase > 1.0)
+    phase -= 1.0;
 }

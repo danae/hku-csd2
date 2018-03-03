@@ -6,10 +6,7 @@
 class SineWave : public Oscillator
 {
   public:
-    // Constructor
-    SineWave(double sampleRate, double frequency, double amplitude = 1.0f, double phase = 0.0f);
-
-    // Destructor
+    SineWave(int sampleRate, double frequency, double amplitude = 1.0, double phase = 0.0);
     virtual ~SineWave();
 
     // Calculate the sample based on the phase

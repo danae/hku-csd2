@@ -2,7 +2,7 @@
 
 using namespace std;
 
-// COnstructor
+// Constructor
 Synthesizer::Synthesizer()
 {
 }
@@ -19,6 +19,18 @@ Synthesizer::~Synthesizer()
 void Synthesizer::addOscillator(Oscillator *oscillator)
 {
   oscillators.push_back(oscillator);
+}
+
+// Remove an oscillator
+void Synthesizer::removeOscillator(int index)
+{
+  oscillators.erase(oscillators.begin() + index);
+}
+
+// Get an oscillator in the vector
+Oscillator* Synthesizer::getOscillator(int index)
+{
+  return oscillators.at(index);
 }
 
 // Tick all oscillators

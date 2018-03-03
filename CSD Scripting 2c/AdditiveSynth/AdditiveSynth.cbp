@@ -5,7 +5,7 @@
 		<Option title="AdditiveSynth" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="Classes\;" />
+		<Option virtualFolders="Classes\;jack_module\;" />
 		<Build>
 			<Script file="lib_finder.script" />
 			<Target title="Build">
@@ -15,10 +15,11 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
-					<Add directory="E:/Libraries/CPP/libsoundio-1.1.0" />
+					<Add directory="C:/Apps/Jack/includes" />
+					<Add directory="include" />
 				</Compiler>
 				<Linker>
-					<Add library="E:/Libraries/CPP/libsoundio-1.1.0/i686/libsoundio.a" />
+					<Add library="C:/Apps/Jack/lib/libjack.lib" />
 				</Linker>
 			</Target>
 		</Build>
@@ -38,11 +39,17 @@
 		<Unit filename="SineWave.h">
 			<Option virtualFolder="Classes/" />
 		</Unit>
-		<Unit filename="SoundModule.cpp">
+		<Unit filename="Synthesizer.cpp">
 			<Option virtualFolder="Classes/" />
 		</Unit>
-		<Unit filename="SoundModule.h">
+		<Unit filename="Synthesizer.h">
 			<Option virtualFolder="Classes/" />
+		</Unit>
+		<Unit filename="jack_module.cpp">
+			<Option virtualFolder="jack_module/" />
+		</Unit>
+		<Unit filename="jack_module.h">
+			<Option virtualFolder="jack_module/" />
 		</Unit>
 		<Unit filename="main.cpp" />
 		<Extensions>

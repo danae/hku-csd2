@@ -11,14 +11,13 @@ class Synthesizer
     std::vector<Oscillator*> oscillators;
 
   public:
-    // Constructor
     Synthesizer();
-
-    // Destructor
     virtual ~Synthesizer();
 
-    // Add an oscillator
+    // Oscillator management
     void addOscillator(Oscillator *oscillator);
+    void removeOscillator(int index);
+    Oscillator* getOscillator(int index);
 
     // Tick all oscillators
     void tick();

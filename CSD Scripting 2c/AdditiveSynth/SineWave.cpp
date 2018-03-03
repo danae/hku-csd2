@@ -1,9 +1,8 @@
 #include "SineWave.h"
-
 #include <math.h>
 
 // Constructor
-SineWave::SineWave(double sampleRate, double frequency, double amplitude, double phaseOffset) :
+SineWave::SineWave(int sampleRate, double frequency, double amplitude, double phase) :
   Oscillator(sampleRate,frequency,amplitude,phase)
 {
 }
@@ -13,7 +12,7 @@ SineWave::~SineWave()
 {
 }
 
-// Calculate the sample based on the phase
+// Calculate the sample based on the phase and the base frequency
 double SineWave::calculate()
 {
   return sin(phase * PI_2) * amplitude;
