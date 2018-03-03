@@ -5,8 +5,8 @@
 #include "jack_module.h"
 #include "Synthesizer.h"
 #include "SineWave.h"
-
-#define COUNT 3
+#include "Patch.h"
+#include "RatioOperator.h"
 
 using namespace std;
 
@@ -23,24 +23,29 @@ int main(int argc, const char** argv)
   JackModule jack;
   jack.init("AdditiveSynth");
 
-  // Create a new synth
-  Synthesizer *synth = new Synthesizer();
+  // Create a new patch
+  Patch* patch = new Patch();
 
-  // Add a sine wave
-  double notes[COUNT] = {mtof(48),mtof(60),mtof(72)};
-  for (int i = 0; i < COUNT; i ++)
-  {
-    cout << i << ": " << notes[i] << endl;
-    synth->addOscillator(new SineWave(jack.getSamplerate(),notes[i]));
-  }
+  // Add operators
+  patch->addOperator(new RatioOperator(1.0));
+  patch->addOperator(new RatioOperator(1.5));
+  patch->addOperator(new RatioOperator(2.0,-20));
+
+  // Create a new synth based on the patch
+  Synthesizer *synth = patch->convert(jack.getSamplerate(),mtof(48));
 
   // Create a callback for the Jack module
   jack.onProcess = [&synth](jack_default_audio_sample_t* inBuf, jack_default_audio_sample_t* outBuf, jack_nframes_t nframes)
   {
     for(int i = 0; i < nframes; i++)
     {
-      outBuf[i] = synth->calculate();
-      synth->tick();
+      // Check if the synth is already made
+      if (synth != nullptr)
+      {
+        // Fill the buffer with the current sample value
+        outBuf[i] = synth->calculate();
+        synth->tick();
+      }
     }
 
     return 0;
@@ -64,6 +69,7 @@ int main(int argc, const char** argv)
 
   // Cleanup
   delete synth;
+  delete patch;
 
   // End
   return 0;
