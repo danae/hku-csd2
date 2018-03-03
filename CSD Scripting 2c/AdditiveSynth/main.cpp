@@ -7,6 +7,7 @@
 #include "SineWave.h"
 #include "Patch.h"
 #include "RatioOperator.h"
+#include "FixedOperator.h"
 
 using namespace std;
 
@@ -30,6 +31,7 @@ int main(int argc, const char** argv)
   patch->addOperator(new RatioOperator(1.0));
   patch->addOperator(new RatioOperator(1.5, 10, 0.1));
   patch->addOperator(new RatioOperator(2.0, -20, 0.33));
+  patch->addOperator(new FixedOperator(400, 0.5));
 
   // Create a new synth based on the patch
   Synthesizer *synth = patch->convert(jack.getSamplerate(),mtof(60));

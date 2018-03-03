@@ -31,7 +31,7 @@
 1519324275 e:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\soundmodule.h
 	<soundio/soundio.h>
 
-1520092230 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\main.cpp
+1520092252 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\main.cpp
 	<iostream>
 	<jack/jack.h>
 	<math.h>
@@ -135,6 +135,14 @@
 	"SineWave.h"
 
 1520092157 d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\ratiooperator.h
+	"Operator.h"
+	"Oscillator.h"
+
+1520092426 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\fixedoperator.cpp
+	"FixedOperator.h"
+	"SineWave.h"
+
+1520092356 d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\fixedoperator.h
 	"Operator.h"
 	"Oscillator.h"
 
