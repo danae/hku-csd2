@@ -18,6 +18,10 @@ class FixedOperator : public Operator
     double getFrequency();
     void setFrequency(double ratio);
 
+    // Dynamic getter and setter for the prompt
+    double get(std::string parameter);
+    void set(std::string parameter, double value);
+
     // Convert this operator to an oscillator with a base frequency
     Oscillator* convert(int sampleRate, double baseFrequency);
 

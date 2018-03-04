@@ -2,6 +2,8 @@
 #include "SineWave.h"
 #include <sstream>
 
+using namespace std;
+
 // Constructor
 FixedOperator::FixedOperator(double frequency, double amplitude, double phase) :
   Operator(amplitude,phase)
@@ -24,6 +26,26 @@ void FixedOperator::setFrequency(double frequency)
   this->frequency = frequency;
 }
 
+// Dynamic getter for the prompt
+double FixedOperator::get(string parameter)
+{
+  if (parameter == "frequency")
+    return getFrequency();
+  else
+    // Call the parent function
+    return Operator::get(parameter);
+}
+
+// Dynamic setter for the prompt
+void FixedOperator::set(string parameter, double value)
+{
+  if (parameter == "frequency")
+    setFrequency(value);
+  else
+    // Call the parent function
+    Operator::set(parameter,value);
+}
+
 // Convert this operator to an oscillator with a base frequency
 Oscillator* FixedOperator::convert(int sampleRate, double baseFrequency)
 {
@@ -36,6 +58,6 @@ Oscillator* FixedOperator::convert(int sampleRate, double baseFrequency)
 std::string FixedOperator::toString()
 {
   std::stringstream ss;
-  ss << "Fixed operator (freq = " << frequency << " Hz, amplitude = " << amplitude << ")";
+  ss << "Fixed operator (frequency = " << frequency << " Hz)";
   return ss.str();
 }

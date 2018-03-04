@@ -12,7 +12,6 @@ class Patch
     // Variables
     std::vector<Operator*> operators;
 
-  public:
     Patch();
     virtual ~Patch();
 

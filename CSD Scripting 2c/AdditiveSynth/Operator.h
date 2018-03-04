@@ -21,6 +21,10 @@ class Operator
     double getPhase();
     void setPhase(double phase);
 
+    // Dynamic getter and setter for the prompt
+    virtual double get(std::string parameter);
+    virtual void set(std::string parameter, double value);
+
     // Convert this operator to an oscillator with a base frequency
     virtual Oscillator* convert(int sampleRate, double baseFrequency) = 0;
 

@@ -31,10 +31,9 @@
 1519324275 e:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\soundmodule.h
 	<soundio/soundio.h>
 
-1520172558 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\main.cpp
+1520175764 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\main.cpp
 	<iostream>
 	<vector>
-	<cstdlib>
 	<math.h>
 	<jack/jack.h>
 	"jack_module.h"
@@ -119,7 +118,7 @@
 1520168209 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\synthesizer.cpp
 	"Synthesizer.h"
 
-1520093403 d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\patch.h
+1520173020 d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\patch.h
 	"Operator.h"
 	"Synthesizer.h"
 	"Oscillator.h"
@@ -129,29 +128,30 @@
 	"Patch.h"
 	<sstream>
 
-1520093115 d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\operator.h
+1520174165 d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\operator.h
 	"Oscillator.h"
 	<string>
 
-1520092208 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\operator.cpp
+1520174385 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\operator.cpp
 	"Operator.h"
+	<stdexcept>
 
-1520093367 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\ratiooperator.cpp
+1520174605 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\ratiooperator.cpp
 	"RatioOperator.h"
 	"SineWave.h"
 	<sstream>
 
-1520092650 d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\ratiooperator.h
+1520174467 d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\ratiooperator.h
 	"Operator.h"
 	"Oscillator.h"
 	<string>
 
-1520093355 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\fixedoperator.cpp
+1520174601 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\fixedoperator.cpp
 	"FixedOperator.h"
 	"SineWave.h"
 	<sstream>
 
-1520092708 d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\fixedoperator.h
+1520174470 d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\fixedoperator.h
 	"Operator.h"
 	"Oscillator.h"
 

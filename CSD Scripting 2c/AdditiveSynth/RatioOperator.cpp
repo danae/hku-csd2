@@ -2,6 +2,8 @@
 #include "SineWave.h"
 #include <sstream>
 
+using namespace std;
+
 // Constructor
 RatioOperator::RatioOperator(double ratio, double detune, double amplitude, double phase) :
   Operator(amplitude,phase)
@@ -33,6 +35,30 @@ void RatioOperator::setDetune(double detune)
   this->detune = detune;
 }
 
+// Dynamic getter for the prompt
+double RatioOperator::get(string parameter)
+{
+  if (parameter == "ratio")
+    return getRatio();
+  else if (parameter == "detune")
+    return getDetune();
+  else
+    // Call the parent function
+    return Operator::get(parameter);
+}
+
+// Dynamic setter for the prompt
+void RatioOperator::set(string parameter, double value)
+{
+  if (parameter == "ratio")
+    setRatio(value);
+  else if (parameter == "detune")
+    setDetune(value);
+  else
+    // Call the parent function
+    Operator::set(parameter,value);
+}
+
 // Convert this operator to an oscillator with a base frequency
 Oscillator* RatioOperator::convert(int sampleRate, double baseFrequency)
 {
@@ -47,6 +73,6 @@ Oscillator* RatioOperator::convert(int sampleRate, double baseFrequency)
 std::string RatioOperator::toString()
 {
   std::stringstream ss;
-  ss << "Ratio operator (ratio = " << ratio << ", detune = " << detune << " Hz, amplitude = " << amplitude << ")";
+  ss << "Ratio operator (ratio = " << ratio << ", detune = " << detune << " Hz)";
   return ss.str();
 }

@@ -15,9 +15,12 @@ using namespace std;
 
 // Global variables
 JackModule jack; // Holds the Jack module for audio
+
 Patch *patch = nullptr; // Holds the current patch
 Synthesizer *synth = nullptr; // Holds the synthesizer converted from the patch
+
 Prompt prompt; // Contains the UI functions
+Operator* currentOp = nullptr; // Holds the currently selected operator
 
 // Convert MIDI notes to frequency
 double mtof(int midiNote)
@@ -39,7 +42,6 @@ int main(int argc, const char** argv)
 
   // Create a new patch
   patch = new Patch();
-  cout << patch->toString() << endl;
 
   // Create a new synth based on the patch
   update(mtof(60));
@@ -64,73 +66,203 @@ int main(int argc, const char** argv)
   // Connect to Jack
   jack.autoConnect();
 
+  // Add a command for a tutorial
+  prompt.add("help",[&](string command, vector<string> args) {
+    cout << "Welcome to ADDITIVESYNTH, a command line tool to create an additive synthesis patch!" << endl;
+    cout << "The following commands can be used to control the synthesizer:" << endl;
+    cout << endl;
+    cout << "list" << endl;
+    cout << "  List the current patch and its operators and view which one is selected." << endl;
+    cout << "addratio <ratio> [detune = 0.0] [amplitude = 1.0] [phase = 0.0]" << endl;
+    cout << "  Adds an ratio operator to the patch." << endl;
+    cout << "addfixed <frequency> [amplitude = 1.0] [phase = 0.0]" << endl;
+    cout << "  Adds a fixed operator to the patch." << endl;
+    cout << "select <index>" << endl;
+    cout << "  Select an operator to modify." << endl;
+    cout << "get <parameter>" << endl;
+    cout << "  Get a parameter of the selected operator and display it." << endl;
+    cout << "set <parameter> <value>" << endl;
+    cout << "  Set a parameter of the selected operator." << endl;
+    cout << "remove" << endl;
+    cout << "  Remove the selected operator (this action cannot be undone)." << endl;
+    cout << "help" << endl;
+    cout << "  Display this tutorial message." << endl;
+    cout << "quit" << endl;
+    cout << "  Quit the program, discarding changes in the patch." << endl;
+
+    return false;
+  });
+
   // Add a command for adding ratio operators
   prompt.add("addratio",[&](string command, vector<string> args) {
-    // Usage: addratio <ratio> [detune = 0.0] [amplitude = 1.0] [phase = 0.0]
+    // Check if all required arguments are given
     if (args.size() < 2)
     {
-      cout << "Usage: addratio <ratio = 1.0> [detune = 0.0] [amplitude = 1.0] [phase = 0.0]" << endl;
+      cout << "Usage: addratio <ratio> [detune = 0.0] [amplitude = 1.0] [phase = 0.0]" << endl;
+      return false;
     }
-    else
-    {
-      // Get the arguments
-      double ratio = Prompt::stringToDouble(args[1],1.0);
 
-      double detune = 0.0;
-      if (args.size() > 2)
-        detune = Prompt::stringToDouble(args[2],0.0);
+    // Get the arguments
+    double ratio = Prompt::stringToDouble(args[1],1.0);
 
-      double amplitude = 1.0;
-      if (args.size() > 3)
-        amplitude = Prompt::stringToDouble(args[3],1.0);
+    double detune = 0.0;
+    if (args.size() > 2)
+      detune = Prompt::stringToDouble(args[2],0.0);
 
-      double phase = 1.0;
-      if (args.size() > 4)
-        phase = Prompt::stringToDouble(args[4],1.0);
+    double amplitude = 1.0;
+    if (args.size() > 3)
+      amplitude = Prompt::stringToDouble(args[3],1.0);
 
-      // Add the new operator
-      Operator* op = new RatioOperator(ratio,detune,amplitude,phase);
-      patch->addOperator(op);
-      update(mtof(60));
+    double phase = 0.0;
+    if (args.size() > 4)
+      phase = Prompt::stringToDouble(args[4],0.0);
 
-      cout << patch->toString() << endl;
-    }
+    // Add the new operator
+    Operator* op = new RatioOperator(ratio,detune,amplitude,phase);
+    patch->addOperator(op);
+    update(mtof(60));
+
+    cout << patch->toString() << endl;
 
     return false;
   });
 
   // Add a command for adding fixed operators
   prompt.add("addfixed",[&](string command, vector<string> args) {
-    // Usage: addratio <ratio> [detune = 0.0] [amplitude = 1.0] [phase = 0.0]
+    // Check if all required arguments are given
     if (args.size() < 2)
     {
-      cout << "Usage: addfixed <frequency = 440> [amplitude = 1.0] [phase = 0.0]" << endl;
+      cout << "Usage: addfixed <frequency> [amplitude = 1.0] [phase = 0.0]" << endl;
+      return false;
     }
-    else
+
+    // Get the arguments
+    double frequency = Prompt::stringToDouble(args[1],440);
+
+    double amplitude = 1.0;
+    if (args.size() > 2)
+      amplitude = Prompt::stringToDouble(args[2],1.0);
+
+    double phase = 0.0;
+    if (args.size() > 3)
+      phase = Prompt::stringToDouble(args[3],0.0);
+
+    // Add the new operator
+    Operator* op = new FixedOperator(frequency,amplitude,phase);
+    patch->addOperator(op);
+    update(mtof(60));
+
+    cout << patch->toString() << endl;
+
+    return false;
+  });
+
+  // Add a command for selecting an operator
+  prompt.add("select",[&](string command, vector<string> args) {
+    // Check if all required arguments are given
+    if (args.size() < 2)
     {
-      // Get the arguments
-      double frequency = Prompt::stringToDouble(args[1],440);
+      cout << "Usage: select <index>" << endl;
+      return false;
+    }
 
-      double amplitude = 1.0;
-      if (args.size() > 2)
-        amplitude = Prompt::stringToDouble(args[2],1.0);
+    // Check if there are any ops to select
+    if (patch->operators.empty())
+    {
+      cout << "There are no operators to select; use the addratio and addfixed commands to add an operator" << endl;
+      return false;
+    }
 
-      double phase = 1.0;
-      if (args.size() > 3)
-        phase = Prompt::stringToDouble(args[3],1.0);
+    // Get the arguments
+    int index = Prompt::stringToInt(args[1],0);
 
-      // Add the new operator
-      Operator* op = new FixedOperator(frequency,amplitude,phase);
-      patch->addOperator(op);
-      update(mtof(60));
+    // Check if the index is in the boundaries
+    if (index < 0 || index >= patch->operators.size())
+    {
+      cout << "The selected index is not valid; valid indices are 0 to " << (patch->operators.size() - 1) << endl;
+      return false;
+    }
 
-      cout << patch->toString() << endl;
+    // Select the operator
+    currentOp = patch->operators[index];
+    cout << "You have now selected " << currentOp->toString() << endl;
+
+    return false;
+  });
+
+  // Add a command for getting parameters of the selected operator
+  prompt.add("get",[&](string command, vector<string> args) {
+    // Check if all required arguments are given
+    if (args.size() < 2)
+    {
+      cout << "Usage: get <parameter>" << endl;
+      return false;
+    }
+
+    // Check if there is currently a selected operator
+    if (currentOp == nullptr)
+    {
+      cout << "You have not selected an operator; use the select command to select an operator" << endl;
+      return false;
+    }
+
+    // Get the arguments
+    string parameter = args[1];
+
+    // Print the value belonging to this parameter
+    try
+    {
+      cout << parameter << " = " << currentOp->get(parameter) << endl;
+    }
+    catch (invalid_argument ex)
+    {
+      cout << currentOp->toString() << " does not have a parameter " << parameter << endl;
+      return false;
     }
 
     return false;
   });
 
-  // Use the prompt to provice a user interface
+  // Add a command for setting parameters of the selected operator
+  prompt.add("set",[&](string command, vector<string> args) {
+    // Check if all required arguments are given
+    if (args.size() < 3)
+    {
+      cout << "Usage: set <parameter> <value>" << endl;
+      return false;
+    }
+
+    // Check if there is currently a selected operator
+    if (currentOp == nullptr)
+    {
+      cout << "You have not selectd an operator; use the select command to select an operator" << endl;
+      return false;
+    }
+
+    // Get the arguments
+    string parameter = args[1];
+    double value = Prompt::stringToDouble(args[2],0.0);
+
+    // Set the parameter and print the new value
+    try
+    {
+      currentOp->set(parameter,value);
+      cout << parameter << " was set to " << value << endl;
+
+      // Update the synth
+      update(mtof(60));
+    }
+    catch (invalid_argument ex)
+    {
+      cout << currentOp->toString() << " does not have a parameter " << parameter << endl;
+      return false;
+    }
+
+    return false;
+  });
+
+  // Use the prompt to provice a user interface, but first print the tutorial
+  prompt.execute("help");
   prompt.run();
 
   // Cleanup
