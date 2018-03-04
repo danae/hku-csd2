@@ -15,12 +15,15 @@ class Synthesizer
     static double mtof(int note);
 
     Synthesizer();
-    virtual ~Synthesizer();
+    ~Synthesizer();
 
     // Oscillator management
     void addOscillator(Oscillator *oscillator);
     void removeOscillator(Oscillator* oscillator);
     Oscillator* getOscillator(int index);
+
+    // Remove all oscillators
+    void reset();
 
     // Tick all oscillators
     void tick();

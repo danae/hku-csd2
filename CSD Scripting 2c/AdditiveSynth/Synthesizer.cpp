@@ -18,8 +18,7 @@ Synthesizer::Synthesizer()
 Synthesizer::~Synthesizer()
 {
   // Delete oscillators that are left over
-  for (Oscillator* oscillator : oscillators)
-    delete oscillator;
+  reset();
 }
 
 // Add an oscillator
@@ -39,6 +38,14 @@ void Synthesizer::removeOscillator(Oscillator *oscillator)
 Oscillator* Synthesizer::getOscillator(int index)
 {
   return oscillators[index];
+}
+
+// Remove all oscillators
+void Synthesizer::reset()
+{
+  for (Oscillator* oscillator : oscillators)
+    delete oscillator;
+  oscillators.clear();
 }
 
 // Tick all oscillators

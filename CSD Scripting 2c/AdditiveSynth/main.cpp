@@ -21,11 +21,14 @@ Synthesizer *synth = nullptr; // Holds the synthesizer converted from the patch
 
 Prompt prompt; // Contains the UI functions
 Operator* currentOp = nullptr; // Holds the currently selected operator
+int currentNote = 60;
+bool playing = true;
 
 // Update the synthesizer to the current patch
-void update(double frequency)
+void update()
 {
-  synth = patch->convert(jack.getSamplerate(),frequency);
+  delete synth;
+  synth = patch->convert(jack.getSamplerate(),Synthesizer::mtof(currentNote));
 }
 
 // Main function
@@ -43,11 +46,15 @@ int main(int argc, const char** argv)
     for(uint32_t i = 0; i < nframes; i++)
     {
       // Check if the synth is already made
-      if (synth != nullptr)
+      if (synth != nullptr && playing)
       {
         // Fill the buffer with the current sample value
         outBuf[i] = synth->calculate();
         synth->tick();
+      }
+      else
+      {
+        outBuf[i] = 0;
       }
     }
 
@@ -60,8 +67,8 @@ int main(int argc, const char** argv)
   // Update the synth if a command is executed
   prompt.after([&](string command) {
     // Only update if the patch was added to or removed from
-    if (command == "addfixed" || command == "addratio" || command == "remove" || command == "set")
-      update(Synthesizer::mtof(60));
+    if (command == "addfixed" || command == "addratio" || command == "remove" || command == "set" || command == "reset" || command == "play")
+      update();
   });
 
   // Add a command for a tutorial
@@ -83,6 +90,12 @@ int main(int argc, const char** argv)
     cout << "  Set a parameter of the selected operator." << endl;
     cout << "remove" << endl;
     cout << "  Remove the selected operator (this action cannot be undone)." << endl;
+    cout << "reset" << endl;
+    cout << "  Reset the patch, discarding changes." << endl;
+    cout << "play [midi note number]" << endl;
+    cout << "  Plays the synthesizer on the given note or continues the last note." << endl;
+    cout << "pause" << endl;
+    cout << "  Pauses the synthesizer." << endl;
     cout << "help" << endl;
     cout << "  Display this tutorial message." << endl;
     cout << "quit" << endl;
@@ -278,6 +291,38 @@ int main(int argc, const char** argv)
     patch->removeOperator(currentOp);
     currentOp = nullptr;
     prompt.execute("list");
+
+    return false;
+  });
+
+  // Add a command to reset the patch
+  prompt.addCommand("reset",[&](string command, vector<string> args) {
+    // Reset the selected op
+    currentOp = nullptr;
+
+    // Reset the patch and list it
+    patch->reset();
+    prompt.execute("list");
+
+    return false;
+  });
+
+  // Add a command to play the synthesizer
+  prompt.addCommand("play",[&](string command, vector<string> args) {
+    // Play the patch
+    playing = true;
+
+    // Get the note to play if one is given
+    if (args.size() > 1)
+      currentNote = Prompt::stringToInt(args[1],60);
+
+    return false;
+  });
+
+  // Add a command to pause the synthesizer
+  prompt.addCommand("pause",[&](string command, vector<string> args) {
+    // Pause the patch
+    playing = false;
 
     return false;
   });

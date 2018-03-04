@@ -12,7 +12,7 @@ class FixedOperator : public Operator
 
   public:
     FixedOperator(double frequency, double amplitude = 1.0, double phase = 0.0);
-    virtual ~FixedOperator();
+    ~FixedOperator();
 
     // Getters and setters
     double getFrequency();

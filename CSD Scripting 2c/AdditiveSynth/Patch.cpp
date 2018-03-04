@@ -13,8 +13,7 @@ Patch::Patch()
 Patch::~Patch()
 {
   // Delete operators that are left over
-  for (Operator *op : operators)
-    delete op;
+  reset();
 }
 
 // Add an operator
@@ -36,6 +35,14 @@ Operator* Patch::getOperator(int index)
   return operators[index];
 }
 
+// Remove all operators
+void Patch::reset()
+{
+  for (Operator* op : operators)
+    delete op;
+  operators.clear();
+}
+
 // Convert this patch to a synthesizer so it can be audible
 Synthesizer* Patch::convert(int sampleRate, double baseFrequency)
 {
@@ -47,6 +54,13 @@ Synthesizer* Patch::convert(int sampleRate, double baseFrequency)
 
   // Return the synthesizer
   return synth;
+}
+
+void Patch::convert(Synthesizer *synthesizer, int sampleRate, double baseFrequency)
+{
+  synthesizer->reset();
+  for (Operator *op : operators)
+    synthesizer->addOscillator(op->convert(sampleRate,baseFrequency));
 }
 
 // Create a string representation for this operator
