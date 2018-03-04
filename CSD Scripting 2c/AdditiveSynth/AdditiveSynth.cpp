@@ -34,6 +34,12 @@ Oscillator* AdditiveSynth::getOscillator(int index)
   return oscillators[index];
 }
 
+// Return the number of oscillators
+int AdditiveSynth::oscillatorCount()
+{
+  return oscillators.size();
+}
+
 // Remove all oscillators
 void AdditiveSynth::reset()
 {

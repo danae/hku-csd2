@@ -159,7 +159,7 @@ int main(int argc, const char** argv)
     }
 
     // Check if there are any ops to select
-    if (patch->operators.empty())
+    if (patch->operatorCount() == 0)
     {
       cout << "There are no operators to select; use the addratio and addfixed commands to add an operator" << endl;
       return false;
@@ -169,9 +169,9 @@ int main(int argc, const char** argv)
     int index = Prompt::stringToInt(args[1],0);
 
     // Check if the index is in the boundaries
-    if (index < 0 || index >= patch->operators.size())
+    if (index < 0 || index >= patch->operatorCount())
     {
-      cout << "The selected index is not valid; valid indices are 0 to " << (patch->operators.size() - 1) << endl;
+      cout << "The selected index is not valid; valid indices are 0 to " << (patch->operatorCount() - 1) << endl;
       return false;
     }
 

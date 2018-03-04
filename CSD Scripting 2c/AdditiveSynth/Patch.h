@@ -9,10 +9,11 @@
 
 class Patch
 {
-  public:
+  protected:
     // Variables
     std::vector<Operator*> operators;
 
+  public:
     Patch();
     ~Patch();
 
@@ -20,6 +21,7 @@ class Patch
     void addOperator(Operator *op);
     void removeOperator(Operator *op);
     Operator* getOperator(int index);
+    int operatorCount();
 
     // Remove all operators
     void reset();

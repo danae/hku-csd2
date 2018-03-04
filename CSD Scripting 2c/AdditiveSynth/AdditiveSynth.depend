@@ -31,7 +31,7 @@
 1519324275 e:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\soundmodule.h
 	<soundio/soundio.h>
 
-1520204499 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\main.cpp
+1520204835 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\main.cpp
 	<iostream>
 	<vector>
 	<math.h>
@@ -47,9 +47,8 @@
 	<functional>
 	<soundio/soundio.h>
 
-1520204452 d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\sinewave.h
+1520204668 d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\sinewave.h
 	"Oscillator.h"
-	"Operator.h"
 
 1520204329 d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\oscillator.h
 
@@ -118,14 +117,14 @@
 	"Synthesizer.h"
 	<cmath>
 
-1520202986 d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\patch.h
+1520204795 d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\patch.h
 	"Operator.h"
 	"Synthesizer.h"
 	"Oscillator.h"
 	<string>
 	<vector>
 
-1520204105 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\patch.cpp
+1520204817 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\patch.cpp
 	"Patch.h"
 	"AdditiveSynth.h"
 	<sstream>
@@ -178,7 +177,7 @@
 	"AdditiveSynth.h"
 	<algorithm>
 
-1520204509 d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\additivesynth.h
+1520204857 d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\additivesynth.h
 	"Synthesizer.h"
 	"Oscillator.h"
 	<vector>

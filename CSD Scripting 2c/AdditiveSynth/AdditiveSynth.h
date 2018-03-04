@@ -19,6 +19,7 @@ class AdditiveSynth : public Synthesizer
     void addOscillator(Oscillator *oscillator);
     void removeOscillator(Oscillator* oscillator);
     Oscillator* getOscillator(int index);
+    int oscillatorCount();
 
     // Remove all oscillators
     void reset();

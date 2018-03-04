@@ -30,6 +30,12 @@ void Patch::removeOperator(Operator *op)
   delete op;
 }
 
+// Return the number of operators
+int Patch::operatorCount()
+{
+  return operators.size();
+}
+
 // Get an operator in the vector
 Operator* Patch::getOperator(int index)
 {
