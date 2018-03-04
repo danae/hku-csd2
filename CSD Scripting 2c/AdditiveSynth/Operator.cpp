@@ -6,8 +6,8 @@ using namespace std;
 // Constructor
 Operator::Operator(double amplitude, double phase)
 {
-  this->amplitude = amplitude;
-  this->phase = phase;
+  setAmplitude(amplitude);
+  setPhase(phase);
 }
 
 // Desctructor

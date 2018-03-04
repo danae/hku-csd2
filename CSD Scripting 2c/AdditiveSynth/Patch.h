@@ -11,11 +11,23 @@ class Patch
 {
   protected:
     // Variables
+    double globalRatio;
+    double globalDetune;
     std::vector<Operator*> operators;
 
   public:
-    Patch();
+    Patch(double globalRatio = 1.0, double globalDetune = 0.0);
     ~Patch();
+
+    // Getters and setters
+    double getGlobalRatio();
+    void setGlobalRatio(double globalRatio);
+    double getGlobalDetune();
+    void setGlobalDetune(double globalDetune);
+
+    // Dynamic getter and setter for the prompt
+    double get(std::string parameter);
+    void set(std::string parameter, double value);
 
     // Operator management
     void addOperator(Operator *op);

@@ -9,8 +9,8 @@ using namespace std;
 RatioOperator::RatioOperator(double ratio, double detune, double amplitude, double phase) :
   Operator(amplitude,phase)
 {
-  this->ratio = ratio;
-  this->detune = detune;
+  setRatio(ratio);
+  setDetune(detune);
 }
 
 // Destructor

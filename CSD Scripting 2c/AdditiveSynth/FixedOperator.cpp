@@ -9,7 +9,7 @@ using namespace std;
 FixedOperator::FixedOperator(double frequency, double amplitude, double phase) :
   Operator(amplitude,phase)
 {
-  this->frequency = frequency;
+  setFrequency(frequency);
 }
 
 // Destructor

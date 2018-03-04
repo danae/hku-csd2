@@ -60,6 +60,10 @@ int main(int argc, const char** argv)
     cout << endl;
     cout << "list" << endl;
     cout << "  List the current patch and its operators and view which one is selected." << endl;
+    cout << "getglobal <parameter>" << endl;
+    cout << "  Get a global parameter of the patch and display it (detune, ratio)." << endl;
+    cout << "setglobal <parameter> <value>" << endl;
+    cout << "  Set a global parameter of the patch." << endl;
     cout << "addratio [ratio = 1] [detune = 0] [amplitude = 1] [phase = 0]" << endl;
     cout << "  Adds an ratio operator to the patch and select it." << endl;
     cout << "addfixed [frequency = 440] [amplitude = 1] [phase = 0]" << endl;
@@ -67,7 +71,7 @@ int main(int argc, const char** argv)
     cout << "select <index>" << endl;
     cout << "  Select an operator to modify." << endl;
     cout << "get <parameter>" << endl;
-    cout << "  Get a parameter of the selected operator and display it." << endl;
+    cout << "  Get a parameter of the selected operator and display it (amplitude, detune, frequency, phase, ratio)." << endl;
     cout << "set <parameter> <value>" << endl;
     cout << "  Set a parameter of the selected operator." << endl;
     cout << "remove" << endl;
@@ -208,7 +212,33 @@ int main(int argc, const char** argv)
     }
     catch (invalid_argument ex)
     {
-      cout << currentOp->toString() << " does not have a parameter " << parameter << endl;
+      cout << "This operator does not have a parameter " << parameter << endl;
+      return false;
+    }
+
+    return false;
+  });
+
+  // Add a command for getting global parameters
+  prompt.addCommand("getglobal",[&](string command, vector<string> args) {
+    // Check if all required arguments are given
+    if (args.size() < 2)
+    {
+      cout << "Usage: getglobal <parameter>" << endl;
+      return false;
+    }
+
+    // Get the arguments
+    string parameter = args[1];
+
+    // Print the value belonging to this parameter
+    try
+    {
+      cout << parameter << " = " << patch->get(parameter) << endl;
+    }
+    catch (invalid_argument ex)
+    {
+      cout << "Patch does not have a parameter " << parameter << endl;
       return false;
     }
 
@@ -255,6 +285,39 @@ int main(int argc, const char** argv)
     return false;
   });
 
+  // Add a command for gsetting global parameters
+  prompt.addCommand("setglobal",[&](string command, vector<string> args) {
+    // Check if all required arguments are given
+    if (args.size() < 3)
+    {
+      cout << "Usage: set <parameter> <value>" << endl;
+      return false;
+    }
+
+    // Get the arguments
+    string parameter = args[1];
+    double value = Prompt::stringToDouble(args[2],0.0);
+
+    // Set the parameter and print the new value
+    try
+    {
+      patch->set(parameter,value);
+      cout << parameter << " = " << value << endl;
+    }
+    catch (invalid_argument ex)
+    {
+      cout << "Patch does not have a parameter " << parameter << endl;
+      return false;
+    }
+    catch (out_of_range ex)
+    {
+      cout << ex.what() << endl;
+      return false;
+    }
+
+    return false;
+  });
+
   // Add a command for removing the selected operator
   prompt.addCommand("remove",[&](string command, vector<string> args) {
     // Check if there is currently a selected operator
@@ -274,6 +337,9 @@ int main(int argc, const char** argv)
 
   // Add a command to reset the patch
   prompt.addCommand("reset",[&](string command, vector<string> args) {
+    // Pause the synth
+    prompt.execute("pause");
+
     // Reset the selected op
     currentOp = nullptr;
 

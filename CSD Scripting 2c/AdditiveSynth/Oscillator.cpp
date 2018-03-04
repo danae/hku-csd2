@@ -7,9 +7,10 @@ using namespace std;
 Oscillator::Oscillator(int sampleRate, double frequency, double amplitude, double phase)
 {
   this->sampleRate = sampleRate;
-  this->frequency = frequency;
-  this->amplitude = amplitude;
-  this->phase = phase;
+
+  setFrequency(frequency);
+  setAmplitude(amplitude);
+  setPhase(phase);
 }
 
 // Destructor

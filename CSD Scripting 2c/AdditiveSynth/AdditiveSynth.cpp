@@ -43,6 +43,7 @@ int AdditiveSynth::oscillatorCount()
 // Remove all oscillators
 void AdditiveSynth::reset()
 {
+  // Delete and dereference all oscillators
   for (Oscillator* oscillator : oscillators)
     delete oscillator;
   oscillators.clear();
