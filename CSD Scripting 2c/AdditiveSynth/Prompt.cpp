@@ -68,16 +68,27 @@ double Prompt::stringToDouble(string str, double defaultValue)
   }
 }
 
+// Get a line from cin
+string Prompt::getLine()
+{
+  char line[128];
+  cin.getline(line,128);
+  return string(line);
+}
+
 // Constructor
 Prompt::Prompt()
 {
+  this->beforeFunction = 0;
+  this->afterFunction = 0;
+
   // Add the quit command
-  add("quit",[&](string command, vector<string> args) {
+  addCommand("quit",[&](string command, vector<string> args) {
     return true;
   });
 
   // Add the help command
-  add("help",[&](string command, vector<string> args) {
+  addCommand("help",[&](string command, vector<string> args) {
     cout << "Available commands: ";
 
     for (auto c : commands)
@@ -94,9 +105,27 @@ Prompt::~Prompt()
 }
 
 // Add a command
-void Prompt::add(string command, PromptFunction fn)
+void Prompt::addCommand(string command, PromptFunction fn)
 {
   commands[command] = fn;
+}
+
+// Remove a command
+void Prompt::removeCommand(string command)
+{
+  commands.erase(command);
+}
+
+// Set the before function
+void Prompt::before(PromptEventFunction fn)
+{
+  beforeFunction = fn;
+}
+
+// Set the after function
+void Prompt::after(PromptEventFunction fn)
+{
+  afterFunction = fn;
 }
 
 // Execute a command
@@ -106,26 +135,27 @@ bool Prompt::execute(string line)
   vector<string> tokens = explode(line);
 
   // Search if there exists a command for the input
-  auto it = commands.find(tokens[0]);
+  auto command = tokens[0];
+  auto it = commands.find(command);
   if (it != commands.end())
   {
     // Found the command, so excute it
-    return it->second(tokens[0],tokens);
+    if (beforeFunction != 0)
+      beforeFunction(command);
+
+    bool result = it->second(command,tokens);
+
+    if (afterFunction != 0)
+      afterFunction(command);
+
+    return result;
   }
   else
   {
     // Not found
-    cout << "Undefined command " << tokens[0] << ", enter 'help' to see a list of available commands" << endl;
+    cout << "Undefined command " << command << ", enter 'help' to see a list of available commands" << endl;
     return false;
   }
-}
-
-// Get a line from cin
-string Prompt::getLine()
-{
-  char line[128];
-  cin.getline(line,128);
-  return string(line);
 }
 
 // Run the prompt loop

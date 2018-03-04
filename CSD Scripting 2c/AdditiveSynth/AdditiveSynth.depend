@@ -31,7 +31,7 @@
 1519324275 e:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\soundmodule.h
 	<soundio/soundio.h>
 
-1520175764 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\main.cpp
+1520178281 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\main.cpp
 	<iostream>
 	<vector>
 	<math.h>
@@ -111,22 +111,25 @@
 
 1453804335 c:\apps\jack\includes\jack\weakmacros.h
 
-1520089729 d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\synthesizer.h
-	<vector>
+1520178210 d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\synthesizer.h
 	"Oscillator.h"
+	<vector>
 
-1520168209 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\synthesizer.cpp
+1520178297 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\synthesizer.cpp
 	"Synthesizer.h"
+	<algorithm>
 
-1520173020 d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\patch.h
+1520177937 d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\patch.h
 	"Operator.h"
 	"Synthesizer.h"
 	"Oscillator.h"
 	<string>
+	<vector>
 
-1520093571 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\patch.cpp
+1520178066 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\patch.cpp
 	"Patch.h"
 	<sstream>
+	<algorithm>
 
 1520174165 d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\operator.h
 	"Oscillator.h"
@@ -136,7 +139,7 @@
 	"Operator.h"
 	<stdexcept>
 
-1520174605 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\ratiooperator.cpp
+1520176484 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\ratiooperator.cpp
 	"RatioOperator.h"
 	"SineWave.h"
 	<sstream>
@@ -146,7 +149,7 @@
 	"Oscillator.h"
 	<string>
 
-1520174601 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\fixedoperator.cpp
+1520176680 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\fixedoperator.cpp
 	"FixedOperator.h"
 	"SineWave.h"
 	<sstream>
@@ -155,14 +158,14 @@
 	"Operator.h"
 	"Oscillator.h"
 
-1520172568 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\prompt.cpp
+1520177432 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\prompt.cpp
 	"Prompt.h"
 	<vector>
 	<iostream>
 	<sstream>
 	<string>
 
-1520172478 d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\prompt.h
+1520177169 d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\prompt.h
 	<string>
 	<functional>
 	<map>

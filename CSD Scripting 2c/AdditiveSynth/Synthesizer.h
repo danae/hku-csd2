@@ -1,8 +1,8 @@
 #ifndef SYNTHESIZER_H
 #define SYNTHESIZER_H
 
-#include <vector>
 #include "Oscillator.h"
+#include <vector>
 
 class Synthesizer
 {
@@ -11,12 +11,15 @@ class Synthesizer
     std::vector<Oscillator*> oscillators;
 
   public:
+    // Convert MIDI notes to frequencies
+    static double mtof(int note);
+
     Synthesizer();
     virtual ~Synthesizer();
 
     // Oscillator management
     void addOscillator(Oscillator *oscillator);
-    void removeOscillator(int index);
+    void removeOscillator(Oscillator* oscillator);
     Oscillator* getOscillator(int index);
 
     // Tick all oscillators

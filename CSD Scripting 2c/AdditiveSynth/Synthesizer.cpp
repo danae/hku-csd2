@@ -1,4 +1,13 @@
 #include "Synthesizer.h"
+#include <algorithm>
+
+using namespace std;
+
+// Convert MIDI notes to frequencies
+double Synthesizer::mtof(int note)
+{
+  return 440.0 * pow(2,(note - 57) / 12.0);
+}
 
 // Constructor
 Synthesizer::Synthesizer()
@@ -20,15 +29,16 @@ void Synthesizer::addOscillator(Oscillator *oscillator)
 }
 
 // Remove an oscillator
-void Synthesizer::removeOscillator(int index)
+void Synthesizer::removeOscillator(Oscillator *oscillator)
 {
-  oscillators.erase(oscillators.begin() + index);
+  oscillators.erase(remove(oscillators.begin(),oscillators.end(),oscillator),oscillators.end());
+  delete oscillator;
 }
 
 // Get an oscillator in the vector
 Oscillator* Synthesizer::getOscillator(int index)
 {
-  return oscillators.at(index);
+  return oscillators[index];
 }
 
 // Tick all oscillators

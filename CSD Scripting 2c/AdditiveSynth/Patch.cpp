@@ -1,5 +1,8 @@
 #include "Patch.h"
 #include <sstream>
+#include <algorithm>
+
+using namespace std;
 
 // Constructor
 Patch::Patch()
@@ -21,15 +24,16 @@ void Patch::addOperator(Operator *op)
 }
 
 // Remove an operator
-void Patch::removeOperator(int index)
+void Patch::removeOperator(Operator *op)
 {
-  operators.erase(operators.begin() + index);
+  operators.erase(remove(operators.begin(),operators.end(),op),operators.end());
+  delete op;
 }
 
 // Get an operator in the vector
 Operator* Patch::getOperator(int index)
 {
-  return operators.at(index);
+  return operators[index];
 }
 
 // Convert this patch to a synthesizer so it can be audible
@@ -46,9 +50,9 @@ Synthesizer* Patch::convert(int sampleRate, double baseFrequency)
 }
 
 // Create a string representation for this operator
-std::string Patch::toString()
+string Patch::toString(Operator* current)
 {
-  std::stringstream ss;
+  stringstream ss;
 
   // Print current patch info
   ss << "Current patch contains " << operators.size() << " operators:";
@@ -57,7 +61,16 @@ std::string Patch::toString()
   for (int i = 0; i < operators.size(); i ++)
   {
     Operator *op = operators[i];
-    ss << std::endl << i << ". " << op->toString();
+    ss << endl;
+
+    // If the op is selected, print an arrow
+    if (current == op)
+      ss << "--> ";
+    else
+      ss << "    ";
+
+    // Print the op string
+    ss << i << ". " << op->toString();
   }
 
   return ss.str();

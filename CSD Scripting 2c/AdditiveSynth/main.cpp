@@ -22,12 +22,6 @@ Synthesizer *synth = nullptr; // Holds the synthesizer converted from the patch
 Prompt prompt; // Contains the UI functions
 Operator* currentOp = nullptr; // Holds the currently selected operator
 
-// Convert MIDI notes to frequency
-double mtof(int midiNote)
-{
-  return 440.0 * pow(2,(midiNote - 57) / 12.0);
-}
-
 // Update the synthesizer to the current patch
 void update(double frequency)
 {
@@ -42,9 +36,6 @@ int main(int argc, const char** argv)
 
   // Create a new patch
   patch = new Patch();
-
-  // Create a new synth based on the patch
-  update(mtof(60));
 
   // Create a callback for the Jack module
   jack.onProcess = [&synth](jack_default_audio_sample_t* inBuf, jack_default_audio_sample_t* outBuf, jack_nframes_t nframes)
@@ -66,17 +57,24 @@ int main(int argc, const char** argv)
   // Connect to Jack
   jack.autoConnect();
 
+  // Update the synth if a command is executed
+  prompt.after([&](string command) {
+    // Only update if the patch was added to or removed from
+    if (command == "addfixed" || command == "addratio" || command == "remove" || command == "set")
+      update(Synthesizer::mtof(60));
+  });
+
   // Add a command for a tutorial
-  prompt.add("help",[&](string command, vector<string> args) {
+  prompt.addCommand("help",[&](string command, vector<string> args) {
     cout << "Welcome to ADDITIVESYNTH, a command line tool to create an additive synthesis patch!" << endl;
     cout << "The following commands can be used to control the synthesizer:" << endl;
     cout << endl;
     cout << "list" << endl;
     cout << "  List the current patch and its operators and view which one is selected." << endl;
     cout << "addratio <ratio> [detune = 0.0] [amplitude = 1.0] [phase = 0.0]" << endl;
-    cout << "  Adds an ratio operator to the patch." << endl;
+    cout << "  Adds an ratio operator to the patch and select it." << endl;
     cout << "addfixed <frequency> [amplitude = 1.0] [phase = 0.0]" << endl;
-    cout << "  Adds a fixed operator to the patch." << endl;
+    cout << "  Adds a fixed operator to the patch and select it." << endl;
     cout << "select <index>" << endl;
     cout << "  Select an operator to modify." << endl;
     cout << "get <parameter>" << endl;
@@ -93,8 +91,15 @@ int main(int argc, const char** argv)
     return false;
   });
 
+  // Add a command to list the patch
+  prompt.addCommand("list",[&](string command, vector<string> args) {
+    cout << patch->toString(currentOp) << endl;
+
+    return false;
+  });
+
   // Add a command for adding ratio operators
-  prompt.add("addratio",[&](string command, vector<string> args) {
+  prompt.addCommand("addratio",[&](string command, vector<string> args) {
     // Check if all required arguments are given
     if (args.size() < 2)
     {
@@ -120,15 +125,16 @@ int main(int argc, const char** argv)
     // Add the new operator
     Operator* op = new RatioOperator(ratio,detune,amplitude,phase);
     patch->addOperator(op);
-    update(mtof(60));
 
-    cout << patch->toString() << endl;
+    // Select the operator and list the current patch
+    currentOp = op;
+    prompt.execute("list");
 
     return false;
   });
 
   // Add a command for adding fixed operators
-  prompt.add("addfixed",[&](string command, vector<string> args) {
+  prompt.addCommand("addfixed",[&](string command, vector<string> args) {
     // Check if all required arguments are given
     if (args.size() < 2)
     {
@@ -150,15 +156,16 @@ int main(int argc, const char** argv)
     // Add the new operator
     Operator* op = new FixedOperator(frequency,amplitude,phase);
     patch->addOperator(op);
-    update(mtof(60));
 
-    cout << patch->toString() << endl;
+    // Select the operator and list the current patch
+    currentOp = op;
+    prompt.execute("list");
 
     return false;
   });
 
   // Add a command for selecting an operator
-  prompt.add("select",[&](string command, vector<string> args) {
+  prompt.addCommand("select",[&](string command, vector<string> args) {
     // Check if all required arguments are given
     if (args.size() < 2)
     {
@@ -183,15 +190,15 @@ int main(int argc, const char** argv)
       return false;
     }
 
-    // Select the operator
-    currentOp = patch->operators[index];
-    cout << "You have now selected " << currentOp->toString() << endl;
+    // Select the operator and list the current patch
+    currentOp = patch->getOperator(index);
+    prompt.execute("list");
 
     return false;
   });
 
   // Add a command for getting parameters of the selected operator
-  prompt.add("get",[&](string command, vector<string> args) {
+  prompt.addCommand("get",[&](string command, vector<string> args) {
     // Check if all required arguments are given
     if (args.size() < 2)
     {
@@ -224,7 +231,7 @@ int main(int argc, const char** argv)
   });
 
   // Add a command for setting parameters of the selected operator
-  prompt.add("set",[&](string command, vector<string> args) {
+  prompt.addCommand("set",[&](string command, vector<string> args) {
     // Check if all required arguments are given
     if (args.size() < 3)
     {
@@ -235,7 +242,7 @@ int main(int argc, const char** argv)
     // Check if there is currently a selected operator
     if (currentOp == nullptr)
     {
-      cout << "You have not selectd an operator; use the select command to select an operator" << endl;
+      cout << "You have not selected an operator; use the select command to select an operator" << endl;
       return false;
     }
 
@@ -248,15 +255,29 @@ int main(int argc, const char** argv)
     {
       currentOp->set(parameter,value);
       cout << parameter << " was set to " << value << endl;
-
-      // Update the synth
-      update(mtof(60));
     }
     catch (invalid_argument ex)
     {
       cout << currentOp->toString() << " does not have a parameter " << parameter << endl;
       return false;
     }
+
+    return false;
+  });
+
+  // Add a command for removing the selected operator
+  prompt.addCommand("remove",[&](string command, vector<string> args) {
+    // Check if there is currently a selected operator
+    if (currentOp == nullptr)
+    {
+      cout << "You have not selected an operator; use the select command to select an operator" << endl;
+      return false;
+    }
+
+    // Remove the current operator, reset the selected operator and list the current patch
+    patch->removeOperator(currentOp);
+    currentOp = nullptr;
+    prompt.execute("list");
 
     return false;
   });

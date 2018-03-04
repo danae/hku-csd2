@@ -73,6 +73,6 @@ Oscillator* RatioOperator::convert(int sampleRate, double baseFrequency)
 std::string RatioOperator::toString()
 {
   std::stringstream ss;
-  ss << "Ratio operator (ratio = " << ratio << ", detune = " << detune << " Hz)";
+  ss << "Ratio operator (ratio = " << ratio << ", detune = " << detune << " Hz, amplitude = " << amplitude << ", phase = " << phase << ")";
   return ss.str();
 }

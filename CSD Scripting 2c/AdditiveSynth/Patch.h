@@ -5,6 +5,7 @@
 #include "Synthesizer.h"
 #include "Oscillator.h"
 #include <string>
+#include <vector>
 
 class Patch
 {
@@ -17,14 +18,14 @@ class Patch
 
     // Operator management
     void addOperator(Operator *op);
-    void removeOperator(int index);
+    void removeOperator(Operator *op);
     Operator* getOperator(int index);
 
     // Convert this patch to a synthesizer so it can be audible
     Synthesizer* convert(int sampleRate, double baseFrequency);
 
     // Create a string representation for this Patch
-    std::string toString();
+    std::string toString(Operator* current = nullptr);
 };
 
 #endif // PATCH_H

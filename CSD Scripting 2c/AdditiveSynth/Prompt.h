@@ -9,12 +9,17 @@
 
 // Use a simple name for the huge function
 typedef std::function<bool(std::string, std::vector<std::string>)> PromptFunction;
+typedef std::function<void(std::string)> PromptEventFunction;
+
+typedef std::map<std::string, PromptFunction> PromptFunctionMap;
 
 class Prompt
 {
   protected:
     // Variables
-    std::map<std::string, PromptFunction> commands;
+    PromptFunctionMap commands;
+    PromptEventFunction beforeFunction;
+    PromptEventFunction afterFunction;
 
   public:
     Prompt();
@@ -27,14 +32,19 @@ class Prompt
     static int stringToInt(std::string str, int defaultValue);
     static double stringToDouble(std::string str, double defaultValue);
 
-    // Add a command
-    void add(std::string command, PromptFunction fn);
+    // Get a line from cin
+    static std::string getLine();
+
+    // Command management
+    void addCommand(std::string command, PromptFunction fn);
+    void removeCommand(std::string command);
+
+    // Set the before and after functions
+    void before(PromptEventFunction fn);
+    void after(PromptEventFunction fn);
 
     // Execute a command
     bool execute(std::string line);
-
-    // Get a line from cin
-    std::string getLine();
 
     // Run the prompt loop
     void run();

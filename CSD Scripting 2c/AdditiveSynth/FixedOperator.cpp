@@ -58,6 +58,6 @@ Oscillator* FixedOperator::convert(int sampleRate, double baseFrequency)
 std::string FixedOperator::toString()
 {
   std::stringstream ss;
-  ss << "Fixed operator (frequency = " << frequency << " Hz)";
+  ss << "Fixed operator (frequency = " << frequency << " Hz, amplitude = " << amplitude << ", phase = " << phase << ")";
   return ss.str();
 }
