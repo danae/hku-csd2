@@ -256,8 +256,8 @@ int main(int argc, const char** argv)
     // Set the parameter and print the new value
     try
     {
-      cout << parameter << " = " << value << " (was " << currentOp->get(parameter) << ")" << endl;
       currentOp->set(parameter,value);
+      cout << parameter << " = " << value << endl;
     }
     catch (invalid_argument ex)
     {

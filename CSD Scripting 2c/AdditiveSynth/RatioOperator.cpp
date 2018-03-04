@@ -1,6 +1,7 @@
 #include "RatioOperator.h"
 #include "SineWave.h"
 #include <sstream>
+#include <stdexcept>
 
 using namespace std;
 

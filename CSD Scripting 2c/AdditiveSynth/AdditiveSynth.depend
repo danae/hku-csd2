@@ -135,24 +135,26 @@
 	"Oscillator.h"
 	<string>
 
-1520174385 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\operator.cpp
+1520182694 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\operator.cpp
 	"Operator.h"
 	<stdexcept>
 
-1520176484 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\ratiooperator.cpp
+1520182861 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\ratiooperator.cpp
 	"RatioOperator.h"
 	"SineWave.h"
 	<sstream>
+	<stdexcept>
 
 1520181818 d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\ratiooperator.h
 	"Operator.h"
 	"Oscillator.h"
 	<string>
 
-1520176680 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\fixedoperator.cpp
+1520182858 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\fixedoperator.cpp
 	"FixedOperator.h"
 	"SineWave.h"
 	<sstream>
+	<stdexcept>
 
 1520181815 d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\fixedoperator.h
 	"Operator.h"
