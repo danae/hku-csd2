@@ -22,6 +22,9 @@ double Operator::getAmplitude()
 }
 void Operator::setAmplitude(double amplitude)
 {
+  if (amplitude < 0.0 || amplitude > 1.0)
+    throw out_of_range("amplitude must be between 0 and 1");
+
   this->amplitude = amplitude;
 }
 double Operator::getPhase()
@@ -30,6 +33,9 @@ double Operator::getPhase()
 }
 void Operator::setPhase(double phase)
 {
+  if (phase < 0.0 || phase > 1.0)
+    throw out_of_range("phase must be between 0 and 1");
+
   this->phase = phase;
 }
 

@@ -19,6 +19,9 @@ FixedOperator::~FixedOperator()
 // Getters and setters
 double FixedOperator::getFrequency()
 {
+  if (frequency <= 0.0)
+    throw out_of_range("frequency must be higher than 0");
+
   return frequency;
 }
 void FixedOperator::setFrequency(double frequency)

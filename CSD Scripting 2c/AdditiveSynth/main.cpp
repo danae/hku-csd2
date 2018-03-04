@@ -78,9 +78,9 @@ int main(int argc, const char** argv)
     cout << endl;
     cout << "list" << endl;
     cout << "  List the current patch and its operators and view which one is selected." << endl;
-    cout << "addratio <ratio> [detune = 0.0] [amplitude = 1.0] [phase = 0.0]" << endl;
+    cout << "addratio [ratio = 1] [detune = 0] [amplitude = 1] [phase = 0]" << endl;
     cout << "  Adds an ratio operator to the patch and select it." << endl;
-    cout << "addfixed <frequency> [amplitude = 1.0] [phase = 0.0]" << endl;
+    cout << "addfixed [frequency = 440] [amplitude = 1] [phase = 0]" << endl;
     cout << "  Adds a fixed operator to the patch and select it." << endl;
     cout << "select <index>" << endl;
     cout << "  Select an operator to modify." << endl;
@@ -92,7 +92,7 @@ int main(int argc, const char** argv)
     cout << "  Remove the selected operator (this action cannot be undone)." << endl;
     cout << "reset" << endl;
     cout << "  Reset the patch, discarding changes." << endl;
-    cout << "play [midi note number]" << endl;
+    cout << "play [midi_note]" << endl;
     cout << "  Plays the synthesizer on the given note or continues the last note." << endl;
     cout << "pause" << endl;
     cout << "  Pauses the synthesizer." << endl;
@@ -113,15 +113,10 @@ int main(int argc, const char** argv)
 
   // Add a command for adding ratio operators
   prompt.addCommand("addratio",[&](string command, vector<string> args) {
-    // Check if all required arguments are given
-    if (args.size() < 2)
-    {
-      cout << "Usage: addratio <ratio> [detune = 0.0] [amplitude = 1.0] [phase = 0.0]" << endl;
-      return false;
-    }
-
     // Get the arguments
-    double ratio = Prompt::stringToDouble(args[1],1.0);
+    double ratio = 1.0;
+    if (args.size() > 1)
+      ratio = Prompt::stringToDouble(args[1],1.0);
 
     double detune = 0.0;
     if (args.size() > 2)
@@ -148,15 +143,10 @@ int main(int argc, const char** argv)
 
   // Add a command for adding fixed operators
   prompt.addCommand("addfixed",[&](string command, vector<string> args) {
-    // Check if all required arguments are given
-    if (args.size() < 2)
-    {
-      cout << "Usage: addfixed <frequency> [amplitude = 1.0] [phase = 0.0]" << endl;
-      return false;
-    }
-
     // Get the arguments
-    double frequency = Prompt::stringToDouble(args[1],440);
+    double frequency = 440;
+    if (args.size() > 1)
+      frequency = Prompt::stringToDouble(args[1],440);
 
     double amplitude = 1.0;
     if (args.size() > 2)
@@ -266,12 +256,17 @@ int main(int argc, const char** argv)
     // Set the parameter and print the new value
     try
     {
+      cout << parameter << " = " << value << " (was " << currentOp->get(parameter) << ")" << endl;
       currentOp->set(parameter,value);
-      cout << parameter << " was set to " << value << endl;
     }
     catch (invalid_argument ex)
     {
-      cout << currentOp->toString() << " does not have a parameter " << parameter << endl;
+      cout << "This operator does not have a parameter " << parameter << endl;
+      return false;
+    }
+    catch (out_of_range ex)
+    {
+      cout << ex.what() << endl;
       return false;
     }
 

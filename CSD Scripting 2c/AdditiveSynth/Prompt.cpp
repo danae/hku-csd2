@@ -41,7 +41,7 @@ int Prompt::stringToInt(string str, int defaultValue)
     else
       return stoi(str);
   }
-  catch (invalid_argument ex)
+  catch (...)
   {
     cout << "The string \"" << str << "\" could not be converted to an integer, using defaut value " << defaultValue << " instead" << endl;
     return defaultValue;
@@ -61,9 +61,9 @@ double Prompt::stringToDouble(string str, double defaultValue)
     else
       return stod(str);
   }
-  catch (invalid_argument ex)
+  catch (...)
   {
-    cout << "The string \"" << str << "\" could not be converted to an integer, using defaut value " << defaultValue << " instead" << endl;
+    cout << "The string \"" << str << "\" could not be converted to a double, using defaut value " << defaultValue << " instead" << endl;
     return defaultValue;
   }
 }

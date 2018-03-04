@@ -24,6 +24,9 @@ double RatioOperator::getRatio()
 }
 void RatioOperator::setRatio(double ratio)
 {
+  if (ratio <= 0.0)
+    throw out_of_range("ratio must be higher than 0");
+
   this->ratio = ratio;
 }
 double RatioOperator::getDetune()

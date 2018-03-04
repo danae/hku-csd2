@@ -31,7 +31,7 @@
 1519324275 e:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\soundmodule.h
 	<soundio/soundio.h>
 
-1520181521 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\main.cpp
+1520182223 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\main.cpp
 	<iostream>
 	<vector>
 	<math.h>
@@ -158,7 +158,7 @@
 	"Operator.h"
 	"Oscillator.h"
 
-1520177432 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\prompt.cpp
+1520182397 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\prompt.cpp
 	"Prompt.h"
 	<vector>
 	<iostream>
