@@ -42,6 +42,10 @@ void Synthesizer::tick()
 // Calculate the sample for all oscillators
 double Synthesizer::calculate()
 {
+  // Check if there are any oscillators, otherwise just return 0 to prevent DC offset
+  if (oscillators.empty())
+    return 0.0;
+
   // Initialize a new sample
   double result = 0.0;
 

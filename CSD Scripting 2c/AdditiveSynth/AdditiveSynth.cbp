@@ -52,8 +52,12 @@
 		<Unit filename="Patch.h">
 			<Option virtualFolder="Patch Classes/" />
 		</Unit>
-		<Unit filename="Prompt.cpp" />
-		<Unit filename="Prompt.h" />
+		<Unit filename="Prompt.cpp">
+			<Option virtualFolder="UI Classes/" />
+		</Unit>
+		<Unit filename="Prompt.h">
+			<Option virtualFolder="UI Classes/" />
+		</Unit>
 		<Unit filename="RatioOperator.cpp">
 			<Option virtualFolder="Patch Classes/" />
 		</Unit>

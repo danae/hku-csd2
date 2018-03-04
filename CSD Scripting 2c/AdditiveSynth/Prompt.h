@@ -5,7 +5,9 @@
 #include <functional>
 #include <map>
 #include <vector>
+#include <stdexcept>
 
+// Use a simple name for the huge function
 typedef std::function<bool(std::string, std::vector<std::string>)> PromptFunction;
 
 class Prompt
@@ -18,17 +20,21 @@ class Prompt
     Prompt();
     virtual ~Prompt();
 
+    // Split string using a delimiter
+    static std::vector<std::string> explode(const std::string str, const std::string delimiter = " ");
+
+    // Convert string to numbers
+    static int stringToInt(std::string str, int defaultValue);
+    static double stringToDouble(std::string str, double defaultValue);
+
     // Add a command
     void add(std::string command, PromptFunction fn);
 
     // Execute a command
     bool execute(std::string line);
 
-    // Get things from cin easily
-    char getChar();
+    // Get a line from cin
     std::string getLine();
-    int getInteger(int defaultValue);
-    double getDouble(double defaultValue);
 
     // Run the prompt loop
     void run();

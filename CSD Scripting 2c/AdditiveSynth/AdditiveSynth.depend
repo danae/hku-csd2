@@ -31,9 +31,10 @@
 1519324275 e:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\soundmodule.h
 	<soundio/soundio.h>
 
-1520101623 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\main.cpp
+1520172558 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\main.cpp
 	<iostream>
 	<vector>
+	<cstdlib>
 	<math.h>
 	<jack/jack.h>
 	"jack_module.h"
@@ -56,7 +57,7 @@
 1520089580 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\oscillator.cpp
 	"Oscillator.h"
 
-1520089504 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\sinewave.cpp
+1520168241 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\sinewave.cpp
 	"SineWave.h"
 	<math.h>
 
@@ -115,7 +116,7 @@
 	<vector>
 	"Oscillator.h"
 
-1520093078 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\synthesizer.cpp
+1520168209 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\synthesizer.cpp
 	"Synthesizer.h"
 
 1520093403 d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\patch.h
@@ -154,16 +155,17 @@
 	"Operator.h"
 	"Oscillator.h"
 
-1520101510 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\prompt.cpp
+1520172568 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\prompt.cpp
 	"Prompt.h"
 	<vector>
 	<iostream>
 	<sstream>
-	<cstdlib>
+	<string>
 
-1520101505 d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\prompt.h
+1520172478 d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\prompt.h
 	<string>
 	<functional>
 	<map>
 	<vector>
+	<stdexcept>
 

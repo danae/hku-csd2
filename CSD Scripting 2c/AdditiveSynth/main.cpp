@@ -39,7 +39,7 @@ int main(int argc, const char** argv)
 
   // Create a new patch
   patch = new Patch();
-  cout << patch->toString() << endl << endl;
+  cout << patch->toString() << endl;
 
   // Create a new synth based on the patch
   update(mtof(60));
@@ -47,7 +47,7 @@ int main(int argc, const char** argv)
   // Create a callback for the Jack module
   jack.onProcess = [&synth](jack_default_audio_sample_t* inBuf, jack_default_audio_sample_t* outBuf, jack_nframes_t nframes)
   {
-    for(int i = 0; i < nframes; i++)
+    for(uint32_t i = 0; i < nframes; i++)
     {
       // Check if the synth is already made
       if (synth != nullptr)
@@ -64,73 +64,68 @@ int main(int argc, const char** argv)
   // Connect to Jack
   jack.autoConnect();
 
-  // Add commands to the prmpt
-  prompt.add("add",[&](string command, vector<string> args) {
-    if (args.size() == 1)
-    {
-      cout << "Do you want to add a (R)atio or a (F)ixed operator? ";
-      switch (prompt.getChar())
-      {
-        case 'r':
-        case 'R':
-        default:
-          cout << "You selected ratio" << endl;
-          break;
-
-        case 'f':
-        case 'F':
-          prompt.execute("addfixed");
-          break;
-      }
-      cin.ignore(1);
-    }
-
-    return false;
-  });
-
   // Add a command for adding ratio operators
   prompt.add("addratio",[&](string command, vector<string> args) {
-    cout << "Enter the following parameters for your new fixed operator:" << endl;
+    // Usage: addratio <ratio> [detune = 0.0] [amplitude = 1.0] [phase = 0.0]
+    if (args.size() < 2)
+    {
+      cout << "Usage: addratio <ratio = 1.0> [detune = 0.0] [amplitude = 1.0] [phase = 0.0]" << endl;
+    }
+    else
+    {
+      // Get the arguments
+      double ratio = Prompt::stringToDouble(args[1],1.0);
 
-    cout << "- Ratio (default 1.0): ";
-    double ratio = prompt.getDouble(1.0);
+      double detune = 0.0;
+      if (args.size() > 2)
+        detune = Prompt::stringToDouble(args[2],0.0);
 
-    cout << "- Detune (default 0 Hz): ";
-    double detune = prompt.getDouble(0);
+      double amplitude = 1.0;
+      if (args.size() > 3)
+        amplitude = Prompt::stringToDouble(args[3],1.0);
 
-    cout << "- Amplitude (default 1.0): ";
-    double amplitude = prompt.getDouble(1.0);
+      double phase = 1.0;
+      if (args.size() > 4)
+        phase = Prompt::stringToDouble(args[4],1.0);
 
-    cout << "- Phase (default 0.0): ";
-    double phase = prompt.getDouble(0.0);
+      // Add the new operator
+      Operator* op = new RatioOperator(ratio,detune,amplitude,phase);
+      patch->addOperator(op);
+      update(mtof(60));
 
-    Operator* op = new RatioOperator(ratio,detune,amplitude,phase);
-    patch->addOperator(op);
-    update(mtof(60));
-
-    cout << endl << patch->toString() << endl << endl;
+      cout << patch->toString() << endl;
+    }
 
     return false;
   });
 
   // Add a command for adding fixed operators
   prompt.add("addfixed",[&](string command, vector<string> args) {
-    cout << "Enter the following parameters for your new fixed operator:" << endl;
+    // Usage: addratio <ratio> [detune = 0.0] [amplitude = 1.0] [phase = 0.0]
+    if (args.size() < 2)
+    {
+      cout << "Usage: addfixed <frequency = 440> [amplitude = 1.0] [phase = 0.0]" << endl;
+    }
+    else
+    {
+      // Get the arguments
+      double frequency = Prompt::stringToDouble(args[1],440);
 
-    cout << "- Frequency (default 440 Hz): ";
-    double frequency = prompt.getDouble(440);
+      double amplitude = 1.0;
+      if (args.size() > 2)
+        amplitude = Prompt::stringToDouble(args[2],1.0);
 
-    cout << "- Amplitude (default 1.0): ";
-    double amplitude = prompt.getDouble(1.0);
+      double phase = 1.0;
+      if (args.size() > 3)
+        phase = Prompt::stringToDouble(args[3],1.0);
 
-    cout << "- Phase (default 0.0): ";
-    double phase = prompt.getDouble(0.0);
+      // Add the new operator
+      Operator* op = new FixedOperator(frequency,amplitude,phase);
+      patch->addOperator(op);
+      update(mtof(60));
 
-    Operator* op = new FixedOperator(frequency,amplitude,phase);
-    patch->addOperator(op);
-    update(mtof(60));
-
-    cout << endl << patch->toString() << endl << endl;
+      cout << patch->toString() << endl;
+    }
 
     return false;
   });

@@ -2,12 +2,12 @@
 #include <vector>
 #include <iostream>
 #include <sstream>
-#include <cstdlib>
+#include <string>
 
 using namespace std;
 
 // Split string using a delimiter
-vector<string> explode(const string str, const string delimiter = " ")
+vector<string> Prompt::explode(const string str, const string delimiter)
 {
   vector<string> vec;
 
@@ -26,6 +26,46 @@ vector<string> explode(const string str, const string delimiter = " ")
   vec.push_back(strc);
 
   return vec;
+}
+
+// Convert string to integer
+int Prompt::stringToInt(string str, int defaultValue)
+{
+  try
+  {
+    // Check if the string is empty
+    if (str.empty())
+      return defaultValue;
+
+    // Otherwise convert
+    else
+      return stoi(str);
+  }
+  catch (invalid_argument ex)
+  {
+    cout << "The string \"" << str << "\" could not be converted to an integer, using defaut value " << defaultValue << " instead" << endl;
+    return defaultValue;
+  }
+}
+
+// Convert string to double
+double Prompt::stringToDouble(string str, double defaultValue)
+{
+  try
+  {
+    // Check if the string is empty
+    if (str.empty())
+      return defaultValue;
+
+    // Otherwise convert
+    else
+      return stod(str);
+  }
+  catch (invalid_argument ex)
+  {
+    cout << "The string \"" << str << "\" could not be converted to an integer, using defaut value " << defaultValue << " instead" << endl;
+    return defaultValue;
+  }
 }
 
 // Constructor
@@ -80,40 +120,12 @@ bool Prompt::execute(string line)
   }
 }
 
-// Get a char from cin
-char Prompt::getChar()
-{
-  char character = cin.get();
-  cin.ignore(1);
-  return character;
-}
-
 // Get a line from cin
 string Prompt::getLine()
 {
   char line[128];
   cin.getline(line,128);
   return string(line);
-}
-
-// Get an interger from cin
-int Prompt::getInteger(int defaultValue = 0)
-{
-  string line = getLine();
-  if (line == "")
-    return defaultValue;
-  else
-    return atoi(line.c_str());
-}
-
-// Get a double from cin
-double Prompt::getDouble(double defaultValue)
-{
-  string line = getLine();
-  if (line == "")
-    return defaultValue;
-  else
-    return atof(line.c_str());
 }
 
 // Run the prompt loop
@@ -123,7 +135,7 @@ void Prompt::run()
   while (true)
   {
     // Wait for user input
-    cout << "> ";
+    cout << endl << "> ";
 
     // Get the line the user has entered and split it
     string input = getLine();
