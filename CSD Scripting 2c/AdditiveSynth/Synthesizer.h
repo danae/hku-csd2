@@ -1,35 +1,20 @@
 #ifndef SYNTHESIZER_H
 #define SYNTHESIZER_H
 
-#include "Oscillator.h"
-#include <vector>
-
 class Synthesizer
 {
-  protected:
-    // Variables
-    std::vector<Oscillator*> oscillators;
-
   public:
     // Convert MIDI notes to frequencies
     static double mtof(int note);
 
     Synthesizer();
-    ~Synthesizer();
+    virtual ~Synthesizer();
 
-    // Oscillator management
-    void addOscillator(Oscillator *oscillator);
-    void removeOscillator(Oscillator* oscillator);
-    Oscillator* getOscillator(int index);
+    // Tick the synthesizer
+    virtual void tick() = 0;
 
-    // Remove all oscillators
-    void reset();
-
-    // Tick all oscillators
-    void tick();
-
-    // Calculate the sample for all oscillators
-    double calculate();
+    // Calculate the sample
+    virtual double calculate() = 0;
 };
 
 #endif // SYNTHESIZER_H

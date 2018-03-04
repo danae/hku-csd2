@@ -1,4 +1,5 @@
 #include "Patch.h"
+#include "AdditiveSynth.h"
 #include <sstream>
 #include <algorithm>
 
@@ -46,7 +47,7 @@ void Patch::reset()
 // Convert this patch to a synthesizer so it can be audible
 Synthesizer* Patch::convert(int sampleRate, double baseFrequency)
 {
-  Synthesizer *synth = new Synthesizer();
+  AdditiveSynth *synth = new AdditiveSynth();
 
   // Iterate over all operators and convert them to oscillators
   for (Operator *op : operators)
@@ -54,13 +55,6 @@ Synthesizer* Patch::convert(int sampleRate, double baseFrequency)
 
   // Return the synthesizer
   return synth;
-}
-
-void Patch::convert(Synthesizer *synthesizer, int sampleRate, double baseFrequency)
-{
-  synthesizer->reset();
-  for (Operator *op : operators)
-    synthesizer->addOscillator(op->convert(sampleRate,baseFrequency));
 }
 
 // Create a string representation for this operator

@@ -8,6 +8,7 @@ class Oscillator
   protected:
     // Variables
     int sampleRate;
+
     double frequency;
     double amplitude;
     double phase;
@@ -17,10 +18,12 @@ class Oscillator
     virtual ~Oscillator();
 
     // Getters and setters
-    int getSampleRate();
     double getFrequency();
+    void setFrequency(double frequency);
     double getAmplitude();
+    void setAmplitude(double amplitude);
     double getPhase();
+    void setPhase(double phase);
 
     // Tick the oscillator
     void tick();

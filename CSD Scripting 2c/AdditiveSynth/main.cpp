@@ -5,7 +5,6 @@
 
 #include "jack_module.h"
 #include "Synthesizer.h"
-#include "SineWave.h"
 #include "Patch.h"
 #include "RatioOperator.h"
 #include "FixedOperator.h"
@@ -15,21 +14,13 @@ using namespace std;
 
 // Global variables
 JackModule jack; // Holds the Jack module for audio
-
 Patch *patch = nullptr; // Holds the current patch
 Synthesizer *synth = nullptr; // Holds the synthesizer converted from the patch
 
+// Global variables for the UI
 Prompt prompt; // Contains the UI functions
 Operator* currentOp = nullptr; // Holds the currently selected operator
 int currentNote = 60;
-bool playing = true;
-
-// Update the synthesizer to the current patch
-void update()
-{
-  delete synth;
-  synth = patch->convert(jack.getSamplerate(),Synthesizer::mtof(currentNote));
-}
 
 // Main function
 int main(int argc, const char** argv)
@@ -43,19 +34,17 @@ int main(int argc, const char** argv)
   // Create a callback for the Jack module
   jack.onProcess = [&synth](jack_default_audio_sample_t* inBuf, jack_default_audio_sample_t* outBuf, jack_nframes_t nframes)
   {
-    for(uint32_t i = 0; i < nframes; i++)
+    for (uint32_t i = 0; i < nframes; i++)
     {
       // Check if the synth is already made
-      if (synth != nullptr && playing)
+      if (synth != nullptr)
       {
         // Fill the buffer with the current sample value
         outBuf[i] = synth->calculate();
         synth->tick();
       }
       else
-      {
         outBuf[i] = 0;
-      }
     }
 
     return 0;
@@ -63,13 +52,6 @@ int main(int argc, const char** argv)
 
   // Connect to Jack
   jack.autoConnect();
-
-  // Update the synth if a command is executed
-  prompt.after([&](string command) {
-    // Only update if the patch was added to or removed from
-    if (command == "addfixed" || command == "addratio" || command == "remove" || command == "set" || command == "reset" || command == "play")
-      update();
-  });
 
   // Add a command for a tutorial
   prompt.addCommand("help",[&](string command, vector<string> args) {
@@ -304,20 +286,24 @@ int main(int argc, const char** argv)
 
   // Add a command to play the synthesizer
   prompt.addCommand("play",[&](string command, vector<string> args) {
-    // Play the patch
-    playing = true;
-
     // Get the note to play if one is given
     if (args.size() > 1)
       currentNote = Prompt::stringToInt(args[1],60);
+
+    // Create the synthesizer
+    if (synth != nullptr)
+      delete synth;
+    synth = patch->convert(jack.getSamplerate(),Synthesizer::mtof(currentNote));
 
     return false;
   });
 
   // Add a command to pause the synthesizer
   prompt.addCommand("pause",[&](string command, vector<string> args) {
-    // Pause the patch
-    playing = false;
+    // Delete the synthesizer
+    if (synth != nullptr)
+      delete synth;
+    synth = nullptr;
 
     return false;
   });

@@ -31,14 +31,13 @@
 1519324275 e:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\soundmodule.h
 	<soundio/soundio.h>
 
-1520182223 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\main.cpp
+1520204499 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\main.cpp
 	<iostream>
 	<vector>
 	<math.h>
 	<jack/jack.h>
 	"jack_module.h"
 	"Synthesizer.h"
-	"SineWave.h"
 	"Patch.h"
 	"RatioOperator.h"
 	"FixedOperator.h"
@@ -48,13 +47,15 @@
 	<functional>
 	<soundio/soundio.h>
 
-1520181823 d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\sinewave.h
+1520204452 d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\sinewave.h
 	"Oscillator.h"
+	"Operator.h"
 
-1520089559 d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\oscillator.h
+1520204329 d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\oscillator.h
 
-1520089580 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\oscillator.cpp
+1520202609 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\oscillator.cpp
 	"Oscillator.h"
+	<stdexcept>
 
 1520168241 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\sinewave.cpp
 	"SineWave.h"
@@ -111,27 +112,26 @@
 
 1453804335 c:\apps\jack\includes\jack\weakmacros.h
 
-1520181800 d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\synthesizer.h
-	"Oscillator.h"
-	<vector>
+1520204077 d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\synthesizer.h
 
-1520181212 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\synthesizer.cpp
+1520204113 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\synthesizer.cpp
 	"Synthesizer.h"
-	<algorithm>
+	<cmath>
 
-1520181805 d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\patch.h
+1520202986 d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\patch.h
 	"Operator.h"
 	"Synthesizer.h"
 	"Oscillator.h"
 	<string>
 	<vector>
 
-1520181201 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\patch.cpp
+1520204105 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\patch.cpp
 	"Patch.h"
+	"AdditiveSynth.h"
 	<sstream>
 	<algorithm>
 
-1520174165 d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\operator.h
+1520203051 d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\operator.h
 	"Oscillator.h"
 	<string>
 
@@ -139,24 +139,24 @@
 	"Operator.h"
 	<stdexcept>
 
-1520182861 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\ratiooperator.cpp
+1520203000 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\ratiooperator.cpp
 	"RatioOperator.h"
 	"SineWave.h"
 	<sstream>
 	<stdexcept>
 
-1520181818 d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\ratiooperator.h
+1520202996 d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\ratiooperator.h
 	"Operator.h"
 	"Oscillator.h"
 	<string>
 
-1520182858 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\fixedoperator.cpp
+1520203015 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\fixedoperator.cpp
 	"FixedOperator.h"
 	"SineWave.h"
 	<sstream>
 	<stdexcept>
 
-1520181815 d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\fixedoperator.h
+1520203005 d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\fixedoperator.h
 	"Operator.h"
 	"Oscillator.h"
 
@@ -173,4 +173,13 @@
 	<map>
 	<vector>
 	<stdexcept>
+
+1520204047 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\additivesynth.cpp
+	"AdditiveSynth.h"
+	<algorithm>
+
+1520204509 d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\additivesynth.h
+	"Synthesizer.h"
+	"Oscillator.h"
+	<vector>
 
