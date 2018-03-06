@@ -31,7 +31,7 @@
 1519324275 e:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\soundmodule.h
 	<soundio/soundio.h>
 
-1520206085 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\main.cpp
+1520206262 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\main.cpp
 	<iostream>
 	<vector>
 	<math.h>
@@ -124,7 +124,7 @@
 	<string>
 	<vector>
 
-1520205843 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\patch.cpp
+1520206328 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\patch.cpp
 	"Patch.h"
 	"AdditiveSynth.h"
 	<sstream>
@@ -174,7 +174,7 @@
 	<vector>
 	<stdexcept>
 
-1520204883 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\additivesynth.cpp
+1520206321 source:d:\hku\2017-2018\csd scripting\csd scripting 2c\additivesynth\additivesynth.cpp
 	"AdditiveSynth.h"
 	<algorithm>
 

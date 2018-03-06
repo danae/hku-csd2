@@ -29,6 +29,12 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="AdditiveSynth.cpp">
+			<Option virtualFolder="Audio Classes/" />
+		</Unit>
+		<Unit filename="AdditiveSynth.h">
+			<Option virtualFolder="Audio Classes/" />
+		</Unit>
 		<Unit filename="FixedOperator.cpp">
 			<Option virtualFolder="Patch Classes/" />
 		</Unit>
