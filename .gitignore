@@ -1,3 +1,7 @@
 __pycache__/
 bin/
 obj/
+/CSD Scripting 2d/Grid/nbproject/private/
+/CSD Scripting 2d/Grid/build/
+/CSD Scripting 2d/Life/nbproject/private/
+/CSD Scripting 2d/Life/build/

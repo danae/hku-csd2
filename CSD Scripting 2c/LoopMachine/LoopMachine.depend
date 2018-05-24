@@ -1,0 +1,91 @@
+# depslib dependency file v1.0
+1520858792 source:e:\hku\2017-2018\csd scripting\csd scripting 2c\loopmachine\jack_module.cpp
+	<iostream>
+	<mutex>
+	<unistd.h>
+	"jack_module.h"
+
+1520858792 e:\hku\2017-2018\csd scripting\csd scripting 2c\loopmachine\jack_module.h
+	<string>
+	<jack/jack.h>
+	"ringbuffer.h"
+
+1453804335 d:\apps\jack\includes\jack\jack.h
+	<jack/systemdeps.h>
+	<jack/types.h>
+	<jack/transport.h>
+	<jack/weakmacros.h>
+
+1453804335 d:\apps\jack\includes\jack\systemdeps.h
+	<windows.h>
+	<stdint.h>
+	<sys/types.h>
+	<inttypes.h>
+	<pthread.h>
+	<sys/types.h>
+	<ptw32/pthread.h>
+	<stdint.h>
+	<inttypes.h>
+	<pthread.h>
+	<sys/types.h>
+
+1453804335 d:\apps\jack\includes\jack\types.h
+	<jack/systemdeps.h>
+
+1329821249 d:\apps\jack\includes\jack\transport.h
+	<jack/types.h>
+	<jack/weakmacros.h>
+
+1453804335 d:\apps\jack\includes\jack\weakmacros.h
+
+1520858792 e:\hku\2017-2018\csd scripting\csd scripting 2c\loopmachine\ringbuffer.h
+	<atomic>
+	<string>
+
+1521479510 source:e:\hku\2017-2018\csd scripting\csd scripting 2c\loopmachine\main.cpp
+	<iostream>
+	<string>
+	<thread>
+	"Timeline.h"
+	"Pattern.h"
+	"Prompt.h"
+	"jack_module.h"
+
+1521478439 e:\hku\2017-2018\csd scripting\csd scripting 2c\loopmachine\timeline.h
+	<vector>
+	<string>
+	"Pattern.h"
+
+1521478974 e:\hku\2017-2018\csd scripting\csd scripting 2c\loopmachine\pattern.h
+	<string>
+
+1521479254 e:\hku\2017-2018\csd scripting\csd scripting 2c\loopmachine\prompt.h
+	<string>
+	<functional>
+	<map>
+	<vector>
+	<stdexcept>
+
+1521478866 source:e:\hku\2017-2018\csd scripting\csd scripting 2c\loopmachine\pattern.cpp
+	"Pattern.h"
+	<sstream>
+
+1521479558 source:e:\hku\2017-2018\csd scripting\csd scripting 2c\loopmachine\prompt.cpp
+	"Prompt.h"
+	<vector>
+	<iostream>
+	<sstream>
+	<string>
+
+1520858792 source:e:\hku\2017-2018\csd scripting\csd scripting 2c\loopmachine\ringbuffer.cpp
+	<iostream>
+	"ringbuffer.h"
+	<unistd.h>
+	<string.h>
+
+1521478959 source:e:\hku\2017-2018\csd scripting\csd scripting 2c\loopmachine\timeline.cpp
+	"Timeline.h"
+	<sstream>
+	<algorithm>
+	<stdexcept>
+

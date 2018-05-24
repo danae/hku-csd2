@@ -79,6 +79,7 @@ string Prompt::getLine()
 // Constructor
 Prompt::Prompt()
 {
+  this->running = false;
   this->beforeFunction = 0;
   this->afterFunction = 0;
 
