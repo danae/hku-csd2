@@ -1,28 +1,23 @@
 package life.gui.hexagon;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class Hex
 {
   // Code mostly adapted from https://www.redblobgames.com/grids/hexagons/
   
-  // Enum to hold directions
-  public enum Direction
-  {
-    NORTHEAST (new Hex(1,0,-1)),
-    EAST (new Hex(1,-1,0)),
-    SOUTHEAST (new Hex(0,1,-1)),
-    SOUTHWEST (new Hex(-1,0,1)),
-    WEST (new Hex(-1,1,0)),
-    NORTHWEST (new Hex(0,1,-1));
-    
-    // Variable to store the relative hex
-    private final Hex hex;
-    
-    // Constructor
-    private Direction(Hex hex)
-    {
-      this.hex = hex;
-    }
-  }
+  // Array to hold directions
+  public static Hex[] DIRECTIONS = {
+    new Hex(1,-1,0), new Hex(1,0,-1), new Hex(0,1,-1),
+    new Hex(-1,1,0), new Hex(-1,0,1), new Hex(0,-1,1) 
+  };
+  
+  // Array to hold diagonal directions
+  public static Hex[] DIAGONAL_DIRECTIONS = {
+    new Hex(2,-1,-1), new Hex(1,1,-2), new Hex(-1,2,-1),
+    new Hex(-2,1,1), new Hex(-1,-1,2), new Hex(1,-2,1) 
+  };
   
   // Coordinates of the hex
   public final int q, r, s;
@@ -107,9 +102,43 @@ public class Hex
   }
   
   // Return the neighboring hex in a particular direction
-  public Hex neighbor(Direction d)
+  public Hex neighbor(int direction)
   {
-    return this.add(d.hex);
+    return this.add(DIRECTIONS[direction % 6]);
+  }
+  
+  // Return the diagnoal neighbor in a particular direction
+  public Hex diagonalNeighbor(int direction)
+  {
+    return this.add(DIAGONAL_DIRECTIONS[direction % 6]);
+  }
+  
+  // Return a ring around the hex
+  public List<Hex> ring(int radius)
+  {
+    // Create a new list to store the hexes
+    List<Hex> hexes = new LinkedList<>();
+    
+    // If the radius is 0, add ourself
+    if (radius == 0)
+      hexes.add(this);
+    
+    // Otherwise calculate
+    else
+    {
+      Hex hex = this.add(DIRECTIONS[4].scale(radius));
+      for (int i = 0; i < 6; i ++)
+      {
+        for (int j = 0; j < radius; j ++)
+        {
+          hexes.add(hex);
+          hex = hex.neighbor(i);
+        }
+      }
+    }
+    
+    // Return the hexes
+    return hexes;
   }
   
   // Return a hex referring to the origin (0,0)

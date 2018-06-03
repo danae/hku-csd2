@@ -59,7 +59,7 @@ public class GContext extends PApplet
   @Override public void draw()
   {
     // Draw a white background
-    background(0);
+    background(255);
     
     // Iterate over the components and draw them
     for (GComponent component : this.components)
