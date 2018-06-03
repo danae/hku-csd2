@@ -2,7 +2,10 @@
 #define TIMELINE_H
 
 #include <vector>
+#include <string>
 #include "Pattern.h"
+
+#define CHUNKSIZE 2048
 
 enum class TimelineStatus
 {
@@ -14,7 +17,7 @@ class Timeline
 {
   private:
     // Variables
-    std::vector<Pattern> patterns;
+    std::vector<Pattern*> patterns;
     unsigned int beatsPerMinute;
     unsigned int beatsPerBar;
 
@@ -41,6 +44,9 @@ class Timeline
 
     // Tick one beat forward
     void beat();
+
+    // Convert to string
+    std::string toString();
 };
 
 #endif // TIMELINE_H

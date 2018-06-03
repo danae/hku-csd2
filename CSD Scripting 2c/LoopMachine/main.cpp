@@ -22,21 +22,34 @@ int main()
   // Create the main time line
   timeline = new Timeline(120,4);
   timeline->addPattern(new Pattern(2));
+  timeline->addPattern(new Pattern(4));
+  timeline->getPattern(1)->setStatus(PatternStatus::QUEUED_FOR_RECORDING);
+
+  cout << timeline->toString() << endl;
 
   // Create a JackModule instance
-  //jack.init("LoopMachine"); // use program name as JACK client name
-  //jack.autoConnect();
+  jack.init("LoopMachine"); // use program name as JACK client name
+  jack.autoConnect();
 
   //std::thread filterThread(filter);
+  thread audioThread([&] {
 
-  // Run the prompt
+  });
+
+  // Add a command to play the timeline
+  prompt.addCommand("play",[&](string command, vector<string> args) {
+    return false;
+  });
+
+  // Create a thread for the prompt
   prompt.run();
 
-  // Stop the filter thread
-  //filterThread.join();
+  // Stop the threads and modules
+  audioThread.join();
+  jack.end();
 
-  // Stop the JackModule
-  //jack.end();
+  // Cleanup
+  delete timeline;
 
   // End
   return 0;
