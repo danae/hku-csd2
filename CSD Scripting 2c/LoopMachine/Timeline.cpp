@@ -1,6 +1,4 @@
 #include "Timeline.h"
-#include <sstream>
-#include <algorithm>
 #include <stdexcept>
 
 using namespace std;
@@ -58,7 +56,7 @@ void Timeline::addPattern(Pattern* pattern)
 void Timeline::removePattern(Pattern* pattern)
 {
   patterns.erase(remove(patterns.begin(),patterns.end(),pattern),patterns.end());
-  delete pattern;
+  delete patterns;
 }
 
 // Get a pattern
@@ -85,16 +83,4 @@ void Timeline::beat()
   {
     // Entering a new bar
   }
-}
-
-// Convert to string
-string Timeline::toString()
-{
-  stringstream ss;
-  ss << "Timeline (" << beatsPerMinute << " bpm, " << beatsPerBar << " beats per bar)" << endl;
-
-  for (Pattern* pattern : patterns)
-    ss << pattern->toString() << endl;
-
-  return ss.str();
 }

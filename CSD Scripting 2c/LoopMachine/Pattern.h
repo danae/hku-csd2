@@ -1,8 +1,6 @@
 #ifndef PATTERN_H
 #define PATTERN_H
 
-#include <string>
-
 enum class PatternStatus
 {
   IDLE,
@@ -28,9 +26,6 @@ class Pattern
     void setStatus(PatternStatus status);
     unsigned int getNumBars();
     void setNumBars(unsigned int numBars);
-
-    // Convert to string
-    std::string toString();
 };
 
 #endif // PATTERN_H
