@@ -27,19 +27,19 @@ Things that would be nice:
 * More nodes.
 
 #### Modular design ####
-Life is designed with a modular mindset. It is currently built on top of [https://processing.org/](Processing) and
-[http://www.beadsproject.net/](Beads), but it is written in a way that it takes minimal effort to use another graphical
+Life is designed with a modular mindset. It is currently built on top of [Processing](https://processing.org/) and
+[Beads](http://www.beadsproject.net/), but it is written in a way that it takes minimal effort to use another graphical
 or audio backend.
 
 Current modules are:
 * **life**: contains the `Grid` and `Node` classes
 * **life.nodes**: contains subclasses of `Node`
 
-![LifeClassDiagram-Life.png](Class diagram: life, life.nodes)
+![Class diagram: life, life.nodes](LifeClassDiagram-Life.png)
 
 * **life.gui**: contains classes that create an abstraction layer for a graphical user interface
 
-![LifeClassDiagram-GUI.png](Class diagram: life, life.nodes)
+![CLass diagram: life.gui](LifeClassDiagram-GUI.png)
 
 ---
 
