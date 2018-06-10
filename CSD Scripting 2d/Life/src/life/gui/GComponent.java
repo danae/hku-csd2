@@ -17,6 +17,9 @@ public abstract class GComponent extends EventHandler implements Drawable
   {
     this.context = context;
     this.bounds = bounds;
+    
+    // Add the component to the context
+    this.context.addComponent(this);
   }
   
   // Return the context

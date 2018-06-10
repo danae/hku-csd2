@@ -44,10 +44,16 @@ public class Point
     return String.format("Point(%f, %f)",this.x,this.y);
   }
   
-  // Return the magnitude of this point (i.e. the distance to the origin)
-  public double magnitude()
+  // Return the length of this point (i.e. the distance to the origin)
+  public double length()
   {
     return Math.sqrt(Math.pow(this.x,2) + Math.pow(this.y,2));
+  }
+  
+  // Return the distance to another point
+  public double distanceTo(Point other)
+  {
+    return this.subtract(other).length();
   }
   
   // Return the angle of this point (relative to the origin)
@@ -86,7 +92,7 @@ public class Point
   public Point rotate(double angle)
   {
     double newAngle = this.angle() + angle;
-    return new Point(this.magnitude() + Math.cos(newAngle),this.magnitude() + Math.sin(newAngle));
+    return new Point(this.length() + Math.cos(newAngle),this.length() + Math.sin(newAngle));
   }
   
   // Return a point at the origin
@@ -98,13 +104,13 @@ public class Point
   // Return the distance between two points
   public static double distance(Point p1, Point p2)
   {
-    return p1.subtract(p2).magnitude();
+    return p2.subtract(p1).length();
   }
   
   // Return the angle between two points
   public static double angle(Point p1, Point p2)
   {
-    return p1.angle() - p2.angle();
+    return p2.subtract(p1).angle();
   }
   
   // Calculates the dot product of two points

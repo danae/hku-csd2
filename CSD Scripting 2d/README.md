@@ -12,17 +12,15 @@
 This is the documentation for the CSD2d induvidual project.
 
 ## Context ##
-**Grid** (working name) is a composition environment that can be used for algorithmic composition. The interface is based on a square grid on which objects can be placed.
+**Life** is a composition environment that can be used for algorithmic composition. The interface is based on a hexagonal grid on which objects can be placed.
 
-Grid is made for composers to quickly generate material or to compose based on this material. The componentsof Grid (called *units*) can be extended or new ones can be built to enhance the composition process.
+Life is made for composers to quickly generate material or to compose based on this material. The components of Life (called *nodes*) can be extended or new ones can be built to enhance the composition process.
 
 ## Funcionality ##
 
-![UI design](GUI idea.svg)
-
 ## Minimal viable product ##
-* A framework consisting of a **grid** of squares on which **units** can be placed. These units can fire **triggers** and can be triggered when they are touched by a trigger. Units can also be connected to other units, causing them to trigger each other immediately.
-* A set of units
+* A framework consisting of a **grid** of hexagons on which **nodes** can be placed.
+* A set of predefined nodes
 * An easy to use library to create new units and extend the functionality of Grid.
 
 ### Components ###

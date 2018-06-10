@@ -3,61 +3,61 @@ package life.gui.util;
 public class Rect
 {
   // Variables
-  public final double x1, y1, x2, y2;
+  public final double left, top, right, bottom;
   
   // Constructor
-  public Rect(double x1, double y1, double x2, double y2)
+  public Rect(double left, double top, double right, double bottom)
   {
-    this.x1 = x1;
-    this.y1 = y1;
-    this.x2 = x2;
-    this.y2 = y2;
+    this.left = left;
+    this.top = top;
+    this.right = right;
+    this.bottom = bottom;
   }
   public Rect(Rect rect)
   {
-    this(rect.x1,rect.y1,rect.x2,rect.y2);
+    this(rect.left,rect.top,rect.right,rect.bottom);
   }
   
   // Return the width
   public double width()
   {
-    return this.x2 - this.x1;  
+    return this.right - this.left;  
   }
   
   // Return the height
   public double height()
   {
-    return this.y2 - this.y1;  
+    return this.bottom - this.top;  
   }
   
   // Return the center of this rect
   public Point center()
   {
-    return new Point((this.x1 + this.x2) / 2.0,(this.y1 + this.y2) / 2.0);  
+    return new Point((this.left + this.right) / 2.0,(this.top + this.bottom) / 2.0);  
   }
   
   // Return sif a point is contained in this rect
   public boolean contains(Point point)
   {
-    return point.x >= this.x1 && point.x <= this.x2 && point.y >= this.y1 && point.y <= this.y2;  
+    return point.x >= this.left && point.x <= this.right && point.y >= this.top && point.y <= this.bottom;  
   }
   
   // Return the corners of this rect as points
   public Point topLeft()
   {
-    return new Point(this.x1,this.y1);
+    return new Point(this.left,this.top);
   }
   public Point topRight()
   {
-    return new Point(this.x2,this.y1);
+    return new Point(this.right,this.top);
   }
   public Point bottomLeft()
   {
-    return new Point(this.x1,this.y2);
+    return new Point(this.left,this.bottom);
   }
   public Point bottomRight()
   {
-    return new Point(this.x2,this.y2);
+    return new Point(this.right,this.bottom);
   }
   
   // Return if this rect is equal to another object
@@ -69,26 +69,26 @@ public class Rect
       return false;
     
     Rect other = (Rect)o;
-    return Double.doubleToLongBits(this.x1) == Double.doubleToLongBits(other.x1)
-      && Double.doubleToLongBits(this.y1) == Double.doubleToLongBits(other.y1)
-      && Double.doubleToLongBits(this.x2) == Double.doubleToLongBits(other.x2)
-      && Double.doubleToLongBits(this.y2) == Double.doubleToLongBits(other.y2);
+    return Double.doubleToLongBits(this.left) == Double.doubleToLongBits(other.left)
+      && Double.doubleToLongBits(this.top) == Double.doubleToLongBits(other.top)
+      && Double.doubleToLongBits(this.right) == Double.doubleToLongBits(other.right)
+      && Double.doubleToLongBits(this.bottom) == Double.doubleToLongBits(other.bottom);
   }
   
   // Return the hash for this rect
   @Override public int hashCode()
   {
     int hash = 7;
-    hash = 89 * hash + (int) (Double.doubleToLongBits(this.x1) ^ (Double.doubleToLongBits(this.x1) >>> 32));
-    hash = 89 * hash + (int) (Double.doubleToLongBits(this.y1) ^ (Double.doubleToLongBits(this.y1) >>> 32));
-    hash = 89 * hash + (int) (Double.doubleToLongBits(this.x2) ^ (Double.doubleToLongBits(this.x2) >>> 32));
-    hash = 89 * hash + (int) (Double.doubleToLongBits(this.y2) ^ (Double.doubleToLongBits(this.y2) >>> 32));
+    hash = 89 * hash + (int) (Double.doubleToLongBits(this.left) ^ (Double.doubleToLongBits(this.left) >>> 32));
+    hash = 89 * hash + (int) (Double.doubleToLongBits(this.top) ^ (Double.doubleToLongBits(this.top) >>> 32));
+    hash = 89 * hash + (int) (Double.doubleToLongBits(this.right) ^ (Double.doubleToLongBits(this.right) >>> 32));
+    hash = 89 * hash + (int) (Double.doubleToLongBits(this.bottom) ^ (Double.doubleToLongBits(this.bottom) >>> 32));
     return hash;
   }
   
   // Convert to string
   @Override public String toString()
   {
-    return String.format("Rect(%f, %f, %f, %f)",this.x1,this.y1,this.x2,this.y2);
+    return String.format("Rect(%f, %f, %f, %f)",this.left,this.top,this.right,this.bottom);
   }
 }

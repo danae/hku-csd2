@@ -64,6 +64,16 @@ public class Layout
     return new Hex(qi,ri,si);
   }
   
+  // Convert a screen coordinate to a direction
+  public int pixelToDirection(Point pixel, Hex origin)
+  {
+    // Get the angle
+    double angle = Point.angle(this.hexToPixel(origin),pixel);
+    double direction = angle / (2 * Math.PI) * 6;
+    
+    return (int)direction;
+  }
+  
   // Return the corner offset point of a hex
   Point cornerOffset(int corner)
   {
