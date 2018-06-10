@@ -1,5 +1,6 @@
 package life.nodes;
 
+import life.Node;
 import java.util.Random;
 import life.Grid;
 import life.gui.hexagon.Hex;

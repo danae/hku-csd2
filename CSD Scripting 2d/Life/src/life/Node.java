@@ -1,4 +1,4 @@
-package life.nodes;
+package life;
 
 import java.util.LinkedList;
 import java.util.List;

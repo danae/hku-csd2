@@ -33,4 +33,10 @@ public abstract class GComponent extends EventHandler implements Drawable
   {
     return this.bounds;
   }
+  
+  // Focus this object
+  public void focus()
+  {
+    this.context.setFocusedComponent(this);
+  }
 }

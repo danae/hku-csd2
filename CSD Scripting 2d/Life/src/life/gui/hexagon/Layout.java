@@ -69,7 +69,10 @@ public class Layout
   {
     // Get the angle
     double angle = Point.angle(this.hexToPixel(origin),pixel);
-    double direction = angle / (2 * Math.PI) * 6;
+    double direction = angle / (2 * Math.PI) * 6 - this.orientation.startAngle;
+    if (direction < 0)
+      direction += 6;
+    System.out.println(direction);
     
     return (int)direction;
   }

@@ -1,5 +1,6 @@
 package life.nodes;
 
+import life.Node;
 import life.Grid;
 import life.gui.events.component.ComponentEnterEvent;
 import life.gui.events.mouse.MousePressEvent;

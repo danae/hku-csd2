@@ -21,6 +21,7 @@ public class GridContext extends GContext
   {
     // Create the grid
     this.grid = new Grid(this,new Rect(0,0,width,height));
+    this.grid.focus();
     
     // Create the font
     PFont font = this.createFont("Verdana",14);

@@ -1,11 +1,6 @@
-- Project omschrijving:
-  - De functionaliteiten (Wat kan het? Hoe gebruik je het?) adhv:
-    - UI-ontwerp + toelichting
-    - audio signal flow diagram + toelichting
-- Minimal viable product
+- UI-ontwerp + toelichting
+- audio signal flow diagram + toelichting
 - Data flow diagram (inclusief UI)
-- Class diagram
-- Planning
 
 # CSD2d induvidual Project #
 
@@ -16,18 +11,35 @@ This is the documentation for the CSD2d induvidual project.
 
 Life is made for composers to quickly generate material or to compose based on this material. The components of Life (called *nodes*) can be extended or new ones can be built to enhance the composition process.
 
-## Funcionality ##
+## Functionality ##
 
-## Minimal viable product ##
+### Minimal viable product ###
 * A framework consisting of a **grid** of hexagons on which **nodes** can be placed.
-* A set of predefined nodes
-* An easy to use library to create new units and extend the functionality of Grid.
+* A set of predefined nodes.
 
-### Components ###
-* **Model**: contains the patch with nodes, channels and edges
-* **Serializer**: serializes and deserializes the model to a saveable file format
-* **View and controller**: displays and interacts with the model
-* **Playback engine**: plays the sound
+### Possible extensions ###
+Things that have priority:
+* Loading and saving projects.
+* More nodes, such as filters, random generators, fetchers of online data...
+
+Things that would be nice:
+* An easy to use library to create new nodes and extend the functionality of Grid.
+* More nodes.
+
+#### Modular design ####
+Life is designed with a modular mindset. It is currently built on top of [https://processing.org/](Processing) and
+[http://www.beadsproject.net/](Beads), but it is written in a way that it takes minimal effort to use another graphical
+or audio backend.
+
+Current modules are:
+* **life**: contains the `Grid` and `Node` classes
+* **life.nodes**: contains subclasses of `Node`
+
+![LifeClassDiagram-Life.png](Class diagram: life, life.nodes)
+
+* **life.gui**: contains classes that create an abstraction layer for a graphical user interface
+
+![LifeClassDiagram-GUI.png](Class diagram: life, life.nodes)
 
 ---
 
@@ -43,15 +55,14 @@ Life is made for composers to quickly generate material or to compose based on t
   * Start with audio engine
 
 **May 14 - 20**
-* Add possibility to save and load models from disk
-* Start with unit components:
+* Start with nodes:
   * Display
   * Audio output
 * Start with UI framework for units
 
 **May 21 - 27**
-* Add more units
-* Unit components:
+* Add more nodes
+* Node components:
   * Interaction (UI)
 
 **May 28 - June 3**

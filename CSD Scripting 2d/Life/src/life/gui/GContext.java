@@ -69,6 +69,40 @@ public class GContext extends PApplet
     this.components.add(component);
   }
   
+  // Return the hovered component
+  public GComponent getHoveredComponent()
+  {
+    return this.hoveredComponent;
+  }
+  
+  // Set the hovered component
+  void setHoveredComponent(GComponent component)
+  {
+    if (!this.components.contains(component))
+      throw new IllegalArgumentException(String.format("The component %s is not part of this context",component));
+    
+    this.hoveredComponent = component;
+    
+    // TODO: Fire events on the old and new object
+  }
+  
+  // Return the focused component
+  public GComponent getFocusedComponent()
+  {
+    return this.focusedComponent;
+  }
+  
+  // Set the focused component
+  void setFocusedComponent(GComponent component)
+  {
+    if (!this.components.contains(component))
+      throw new IllegalArgumentException(String.format("The component %s is not part of this context",component));
+    
+    this.focusedComponent = component;
+    
+    // TODO: Fire events on the old and new object
+  }
+  
   // Setup method
   @Override public void setup()
   {
