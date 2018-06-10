@@ -1,7 +1,3 @@
-- UI-ontwerp + toelichting
-- audio signal flow diagram + toelichting
-- Data flow diagram (inclusief UI)
-
 # CSD2d induvidual Project #
 
 This is the documentation for the CSD2d induvidual project.
@@ -26,20 +22,26 @@ Things that would be nice:
 * An easy to use library to create new nodes and extend the functionality of Grid.
 * More nodes.
 
-#### Modular design ####
+### Modular design ###
 Life is designed with a modular mindset. It is currently built on top of [Processing](https://processing.org/) and
 [Beads](http://www.beadsproject.net/), but it is written in a way that it takes minimal effort to use another graphical
 or audio backend.
 
 Current modules are:
-* **life**: contains the `Grid` and `Node` classes
-* **life.nodes**: contains subclasses of `Node`
+* **life**: contains the `Grid` and `Node` classes.
+* **life.nodes**: contains subclasses of `Node`.
 
 ![Class diagram: life, life.nodes](LifeClassDiagram-Life.png)
 
-* **life.gui**: contains classes that create an abstraction layer for a graphical user interface
+* **life.gui**: contains classes that create an abstraction layer for a graphical user interface.
 
-![CLass diagram: life.gui](LifeClassDiagram-GUI.png)
+![Class diagram: life.gui](LifeClassDiagram-GUI.png)
+
+### User interface ###
+The user interface consists of a hexagonal grid on which hexagonal nodes can be placed. In the bottom of the window
+is a bar that contains the nodes that can be placed. When such node is selected, the mouse click places a node of
+that type.
+![UI design](GUI.png)
 
 ---
 

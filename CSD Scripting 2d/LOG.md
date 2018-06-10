@@ -33,3 +33,13 @@ I made this comparison table:
   * Requires *Java Runtime Environment* to run, which makes the language quite slow compared to C++
 
 In the end I thus decided to use Java with *Processing* for graphics and *Beads* for audio output.
+
+## May 21 - June 3 ##
+* Decided the modular structure to use
+* Work on the GUI abstraction (for now on top of Processing)
+
+## June 4 - June 10 ##
+* Work on the audio output (which is not yet modular)
+* Created a `GeneratorNode` that generates a sine wave. The frequency can be controlled by dragging on the node.
+* Created the interface for a `SequencerNode`.
+* Finishing the documentation
